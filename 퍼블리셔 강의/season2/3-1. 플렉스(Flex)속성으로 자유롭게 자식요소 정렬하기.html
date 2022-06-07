@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플렉스 속성으로 자유롭게 자식요소 정렬하기</title>
+    <style>
+        /* .parent{
+            border : 5px solid #000;
+            width : 1280px;
+            overflow: hidden;
+        }
+        .parent div{
+            border : 5px solid red;
+            height : 200px;
+            float : left;
+            width : calc(1280px / 5);
+            box-sizing : border-box;
+        } */
+        .parent{
+            border : 5px solid #000;
+            width: 1280px;
+            height: 500px;
+            display : flex;
+            /* 수평정렬(부모태그에서 해줘야한다.) > justify-content : center(가운데) , flex-end(오른쪽) */
+            /* justify-content: center; */
+            justify-content: center;
+            /* 수직정렬(부모태그에서 해줘야한다.) > align-items : center(가운데) ,  */
+            align-items: center;
+
+            /* justify-content , align-items 를 center로 하게되면 부모 relative, 자식 absolute 50% 50% transform과 동일효과 */
+            
+        }
+        .parent div{
+            border : 5px solid red;
+            height : 200px;
+            width : 300px;
+            /* flex : 1;  */
+            /* width : calc(1280px / 5)라고 하는것보다 flex로 1을 주게되면 자동으로 width가 계산되서 들어간다. */
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div>child</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #fff;
+            color: #333;
+            font-size: 15px;
+        }
+        a{
+            color: #333;
+            text-decoration: none;
+            /* transition은 꼭 hover가 아닌곳에 넣어줘야 한다. 즉 a:hover가 아닌 a 태그에 넣어줘야한다.*/
+            /* transition은 이벤트발생하는 효과가 걸리는 시간을 말한다. */
+            transition : 0.5s;
+            width: 120px;
+            display: inline-block;
+            text-align: center;
+            padding: 5px;
+            border-radius:5px
+        }
+        a:hover{
+            color: #fff;
+            background-color:#000;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <a href="#none">법적고지</a>
+    <a href="#none">개인정보취급방지</a>
+    <a href="#none">개인정보처리방침</a>
+    <!-- hover , transition -->
+</body>
+</html>

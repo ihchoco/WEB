@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비디오 백그라운드 섹션(Flex 레이아웃)</title>
+    <style>
+        /* Google Web Fonts CDN */
+        @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700,900&display=swap');
+        
+        body{
+            margin : 0;
+            line-height : 1.6em;
+            font-size : 18px;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        /* Section : Hero */
+        .hero{
+            height: 70vh;
+            position : relative;
+            overflow : hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background-color : rgba(0, 0, 0, 0.068); */
+            background : linear-gradient(to top, black, transparent);
+        }
+        /* ######### USING position ########### */
+        /* .hero video{
+            position : absolute;
+            top: 50%;
+            left : 50%;
+            transform: translate(-50%, -50%);
+            min-width : 100%;
+            min-height : 100%;
+            z-index : -1;
+        } */
+        .hero video{
+            position : absolute;
+            top : 0;
+            left : 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero .heading{
+            text-align: center;
+            width: 60%;
+            color:#fff;
+        }  
+        .hero .heading h1{
+            font-weight: 500;
+            line-height: 1.6em;
+            font-size: 2em;
+        }
+        .hero .heading h1 span{
+            display : block;
+            color : crimson;
+        }
+
+        /* Section : Content */
+        .content{
+            padding: 80px 0;
+            display : flex;
+            justify-content: center;
+        }
+        .content .inner{
+            width : 1280px;
+            display : flex;
+            gap : 70px;
+        }
+        .content .inner div{
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero">
+            <div class="heading">
+                <h1><span>with CodingWorks</span> HTML+CSS+JS Portfolio Practical Publishing (Season2)</h1>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, architecto vero fuga id delectus quod dolor beatae. Ipsa, debitis necessitatibus nulla nemo qui unde neque libero. Temporibus veniam corrupti aliquid.
+                </p>
+            </div>
+            <video src="../VIDEO/Ink - 67358.mp4" autoplay muted loop poster="../Image/background.png"></video>
+        </section>
+        <section class="content">
+            <div class="inner">
+                <div>
+                    <h2>HTML</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga sit nobis iste ea id distinctio corrupti aliquid temporibus impedit similique totam architecto hic est repudiandae quam doloribus, dolorem fugiat placeat.
+                    </p>
+                </div>
+                <div>
+                    <h2>CSS</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga sit nobis iste ea id distinctio corrupti aliquid temporibus impedit similique totam architecto hic est repudiandae quam doloribus, dolorem fugiat placeat.
+                    </p>
+                </div>
+                <div>
+                    <h2>Javascript</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga sit nobis iste ea id distinctio corrupti aliquid temporibus impedit similique totam architecto hic est repudiandae quam doloribus, dolorem fugiat placeat.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+</body>
+</html>

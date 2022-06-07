@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent{
+            border : 5px solid red;
+            width : 600px;
+            overflow: hidden;
+        }
+        .child{
+            background-color: gold;
+            width: 200px;
+            height: 200px;
+            float : left;
+        }
+
+        .parent2{
+            border : 5px solid red;
+            width:600px;
+        }
+        .top{
+            background-color: purple;
+            height: 50px;
+        }
+        .left{
+            background-color: gray;
+            height: 100px;
+            width: 200px;
+            float : left;
+        }
+        .right{
+            background-color: orange;
+            height: 100px;
+            width: 400px;
+            float : right;
+        }
+        .clear{
+            background-color: purple;
+            height: 50px;
+            clear: both;
+        }
+
+        .parent3{
+            border : 5px solid #000;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        article{
+            color: black;
+            background-color: gold;
+            width : 600px;
+            height : 200px;
+            text-align: center;
+            line-height: 200px;
+            border: 1px solid black;
+            display : inline-block;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 
+        1. CSS 가로 배치하기(float , overflow, clear, inline-block, hidden)
+        입문자들이 가장 어려워하는 부분. 열심히 해보자. 2회독 필수!!
+        
+        CSS 포지셔닝 - 엘리먼트 수평 정렬하기 (속성 : float)
+        :float 속성은 요소가 부모요소 기준으로 왼쪽 또는 오른쪽에 배치할지 지정한다.
+
+        display : none; //아무것도 지정안함
+        display : float; //float 지정
+        float : left; //(왼쪽으로 배치 - inline,block요소 모두 가능)
+        margin : auto; //(가운데로 배치 - block요소만 가능 O / inline, inline-block X)
+        float : right; //(오른쪽으로 배치 - inline,block요소 모두 가능)
+
+        사람들이 보통 block이 왼쪽에 있으니까 float: left가 되어있는줄 알지만 실제로 float : none 상태이다.
+
+
+
+        <div class="parent">
+            <div class="child"></div>
+        </div>
+        .parent{
+            border : 5px solid red;
+            width : 600px;
+        }
+        .child{
+            background-color: gold;
+            width: 200px;
+            height: 200px;
+            float : left;
+        }
+
+        위 상태에서 아래와 같이 자식인 .child에 float 주면 부모는 높이값을 잃어버리게 된다.
+        만약에 .child 에 float를 주지않으면 .parent도 같이 height : 200px을 가지게 된다.
+        (float 뜻 : 둥둥뜬다. 자식요소가 붕 떠버리니까 부모가 봤을때 자식이 없네? 라고 생각한다.)
+        이렇게 사용할때 부모가 height를 가지게 하려면 
+            - 1. 강제로 .parent { height : 200px } 이렇게 주는법
+            - 2. .parent { overflow : hidden } 값을 준다. (자동으로 자식값의 높이를 찾아서 부모에 맞춰준다.!!!!!!!!!!!!!)
+        2번 방법을 쓰면 굳이 자식 높이를 정확히 구하지 않아도 되고 또 변경될때도 자동으로 맞춰주나까 자식에 float를 줄때 부모에는 overflow : hidden을 꼭 주자
+
+
+        <div class="parent">
+            <div class="child"></div>
+        </div>
+        .parent{
+            border : 5px solid red;
+            width : 600px;
+        }
+        .child{
+            background-color: gold;
+            width: 200px;
+            height: 200px;
+            display : inline-block; <--
+            /* float : left; */
+            margin : auto; <-- 
+        }
+
+        위 상태에서 자식인 child가 display : inline-block이고 가운데 정렬을 하고 싶은데 margin : auto를 주니까 동작하지 않는다.
+        Reason) inline-block의 경우 margin값을 가질수는 있지만 margin auto는 동작하지 않는다.
+        margin : auto를 사용하려면 무조건 diplay : block상태여야 한다.
+        이럴경우 .parent{ text-align : center; }를 사용해야지 자식(inline-block)을 가운데로 위치시킬수 있따.
+        
+        
+        text-align : center >> 자식요소인 인라인 요소들을 가운데로 위치시킨다.(block은 움직이지 않는다)
+        block이 자식이면 가운데 정렬할때 => margin : auto로 정렬
+
+        2. 상속받은 float속성 해제하는 방법(clear)
+        float 속성이 적용되면 다음 요소가 float 속성을 상속 받는데 이것을 해제시킨다.
+
+        clear : left | right | both
+        - left : 왼쪽 float 속성 상속 해제
+        - right : 오른쪽 float 속성 상속 해제
+        - both : 양쪽 float 속성 상속 해제!! 가장 자주 사용됨
+        
+
+        3. 가로 배치 2가지 방법 : float , inline-block
+        (float , overflow, box-sizing & inline-block)
+        
+         1) float 와 overflow를 사용해 배치
+         2) display : inline-block으로 배치
+       
+
+    -->
+
+    <!---->
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+    
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+    <div class="parent2">
+        <div class="top">float : none</div>
+        <div class="left">float : left</div>
+        <div class="right">float : right</div>
+        <div class="clear">float : both</div>
+    </div>
+    
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+    <div class="parent3">
+        <article>article</article>
+        <article>article</article>
+        <article>article</article>
+    </div>
+</body>
+</html>

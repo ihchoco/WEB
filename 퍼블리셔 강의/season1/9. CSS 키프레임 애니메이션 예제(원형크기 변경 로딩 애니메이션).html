@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.5em;
+            margin: 0;
+            font-weight: 300;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .loading{
+
+        }
+        .loading span{
+            display : inline-block;
+            width : 15px;
+            height: 15px;
+            background-color: gray;
+            border-radius: 50%;
+            animation: loading 1s linear infinite;
+            /* 
+                animation 
+                    - loading : keyframe 이름(적용할 애니메이션 이름)
+                    - 1s : animation duration(지속시간)
+                    - 0s : animation delay(몇 초 뒤에 시작할지)
+                    - linear : keyframe과 keyframe이 넘어갈때 부드럽게 넘어가라는 뜻
+                    - infinite : 무한반복 시키겠다.
+            */
+        }
+        .loading span:nth-child(1){
+            animation-delay: 0s; /* delay 없이 바로 시작*/
+            background-color: crimson;
+        }
+        .loading span:nth-child(2){
+            animation-delay: 0.2s; /* 0.2초 대기후 바로 시작*/
+            background-color: dodgerblue;
+        }
+        .loading span:nth-child(3){
+            animation-delay: 0.5s; /* 0.5초 대기후 바로 시작*/
+            background-color: royalblue;
+        }
+
+        @keyframes loading{
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: (0.5);
+            }
+        }
+        /*
+            1. CSS로 모양을 잡는다.
+            2. @keyframes로 애니메이션을 만든다.
+            3. 만든 keyframesf을 CSS 해당태그에 animation으로 붙여주자. 
+        */
+    </style>
+</head>
+<body>
+    
+    <div class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+</html>

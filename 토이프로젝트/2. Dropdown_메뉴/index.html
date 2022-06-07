@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DROP-DOWN 플러그인</title>
+
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- dropdown js 적용 -->
+    <script src="JS/dropdown-min.js"></script>
+    <!-- dropdown style 적용 -->
+    <link rel="stylesheet" href="CSS/dropdown.css">
+    
+    <script>
+        $(document).ready(function(){
+            // let options = {
+            //     'selector' : '.dropDown',
+            //     'width' : '400px'
+            // }
+            let options = {
+                'selector' : '.dropDown'
+            }
+            //new DropDown(".dropDown");
+            new DropDown(options);
+            //MyApp.DropDown(options);
+        })
+    </script>
+</head>
+<body>
+    <h2>DROWN DOWN 플러그인 프로젝트</h2>
+
+    <div class="dropDown">
+        <div class="dropDownButton">DROP-DOWN</div>
+        <div class="dropDownMenu">
+            <a href="#none">Menu1</a>
+            <a href="#none">Menu2</a>
+            <a href="#none">Menu3</a>
+            <a href="#none">Menu4</a>
+            <a href="#none">Menu5</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다중탭메뉴</title>   
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        
+    </style>
+    <script>
+        $(document).ready(function(){
+            //매개변수 5개 가지는 함수 구현(call by value 방식)
+            /*
+            function showInfo(userName, id, nickname, age, address){
+                document.write("CALL BY VALUE 방식<br>");
+                document.write("userName : "+userName + " , id : "+id + " , nickname : "+nickname+" , age : "+age+" , address : "+address);
+                document.write("<br>");
+            }
+            */
+            //오브젝트 리터럴 클래스를 매개변수로 받고 있다.
+            function showInfo(userInfo){
+                document.write("리터럴 방식<br>");
+                document.write("userName : "+userInfo.userName + " , id : "+userInfo.id + " , nickname : "+userInfo.nickname+" , age : "+userInfo.age+" , address : "+userInfo.address);
+                document.write("<br>");
+            }
+            
+            //오브젝트 리터럴 클래스 방식으로 매개변수를 주는 코드
+            var userInfo = {
+                userName : "신은혁",
+                id : "ek",
+                nickname : "태권소년",
+                age : 15,
+                address : "대구시"
+            }
+
+            
+            //함수호출 - 오브젝트 리터럴 방식을 사용하지 않은 일반적 방식
+            //showInfo("신은혁", "ek", "태권소년", 15, "대구시");
+            
+            //함수호출 - 오브젝트 리터럴 방식으로 사용
+            showInfo(userInfo);
+        });      
+
+    </script>
+</head>
+<body>
+
+    
+</body>
+</html>

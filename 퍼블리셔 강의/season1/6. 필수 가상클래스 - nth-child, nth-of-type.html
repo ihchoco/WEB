@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            border : 5px solid #000;
+        }
+        .box div{
+            border : 5px solid #000;
+            margin : 10px;
+            width : 200px;
+            height: 200px;
+            display: inline-block
+        }
+        /* 
+        nth-child는 태그를 가리지 않는다.
+        
+        .box div:nth-child(1){
+            background-color: dodgerblue;
+        }
+        .box div:nth-child(2){
+            background-color: red;
+        }
+        .box div:nth-child(3){
+            background-color: #fff;
+        }
+        .box div:nth-child(4){
+            background-color: gold;
+        }
+        이렇게 사용하고 아래처럼 사용하는데 원래 h2가 없었는데 갑자기 생겨서 div가 하나씩 밀려나게 되었음. 
+        div class="box">
+            <h2>Headline Text</h2> <-- 신규로 추가
+            <dic></dic>
+            <dic></dic>
+            <dic></dic>
+            <dic></dic>
+        </div>
+
+        ** :nth-child(숫자)는 태그를 가리지 않고 순서를 매긴다. 즉 h2나 div, 다른 태그등 전체 갯수에서 숫자를 매기지만
+           :nth-of-type(숫자)는 태그를 가린다. 즉 h2 1개, div가 4개 있어도 div:nth-of-type(숫자)를 하게 되면 div태그들 중에서 숫자를 매긴다.
+           실제로 사용할 때는 nth-of-type 사용하자. 
+        */
+        .box div:nth-of-type(1){
+            background-color: dodgerblue;
+        }
+        .box div:nth-of-type(2){
+            background-color: red;
+        }
+        .box div:nth-of-type(3){
+            background-color: #fff;
+        }
+        .box div:nth-of-type(4){
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Headline Text</h2>
+        <dic></dic>
+        <dic></dic>
+        <dic></dic>
+        <dic></dic>
+    </div>
+</body>
+</html>

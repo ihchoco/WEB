@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container .hero{
+            position : relative;
+            height: 70vh;
+            overflow: hidden;
+            margin: 0 auto;
+            color : white;
+            display : flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container .heading{
+            text-align: center;
+            width: 60%;
+            color:#fff;
+        }
+        .container .hero h1{
+            margin: 30px;
+        }
+        .container .hero p{
+
+        }
+        .container .hero span{
+            color : crimson;
+            display : block;
+        }
+        .container .hero video{
+            position : absolute;
+            top : 50%;
+            left : 50%;
+            transform: translate(-50%, -50%);
+            z-index : -1;
+            min-width : 100%;
+            min-height : 100%;
+        }
+        .container .article{
+            display : flex;
+            width : inherit;
+            justify-content: center;
+        }
+        .container .article div{
+            flex: 1;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero">
+            <div class="heading">
+                <h1><span>(Giyeon Practice)</span>이제 롤 하러가자</h1>
+                <p>sit amet consectetur adipisicing elit. Accusantium corporis debitis dolore suscipit! Eveniet doloribus numquam praesentium mollitia alias eum dolorem cupiditate quos quo autem, temporibus natus, consequatur, omnis tempora.</p>
+            </div>
+            <video src="../VIDEO/Ink - 67358.mp4" autoplay loop poster="../Image/background.png">
+        </section>
+        <section class="article">
+            <div>
+                <h2>HTML</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quo saepe quas consequuntur id iste accusamus nihil eos tempora est. Vitae odit eum facilis dolores voluptas nobis aliquam repellat magni.</p>
+            </div>
+            <div>
+                <h2>CSS</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quo saepe quas consequuntur id iste accusamus nihil eos tempora est. Vitae odit eum facilis dolores voluptas nobis aliquam repellat magni.</p>
+            </div>
+            <div>
+                <h2>Javascript</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quo saepe quas consequuntur id iste accusamus nihil eos tempora est. Vitae odit eum facilis dolores voluptas nobis aliquam repellat magni.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

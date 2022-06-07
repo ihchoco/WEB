@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        section{
+            border : 5px solid black;
+            width : 600px;
+            overflow : hidden;
+        }
+        section article{
+            background-color: gold;
+            width: 200px;
+            height: 100px;
+            float: left;
+            border: 1ox solid red; 
+            box-sizing : border-box;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        단순하게 
+        section{
+            border : 5px solid black;
+            width : 600px;
+            overflow : hidden;
+        }
+        section article{
+            background-color: gold;
+            width: 200px;
+            height: 100px;
+            float: left;
+        }
+        여기까지만 하면 section 3개의 secction이 정상적으로 가로배열 되지만..
+        만약에 .article border : 1px solid red; 이렇게 주게된다면 
+        article => width + border ( 200px + 2px(좌 + 우) )이렇게 되어 1개의 article width = 202px
+        article이 3개이면 606px이다. 하지만 section(부모)의 width : 600px인데 이것을 초과하니까 2개는 위에 있고 한개는 아래에 넘쳐서 배치가된다.
+        이럴경우 article의 width를 너비와 border가 합쳐서 200이 되면 되는데
+
+        이렇게 하기 위해서는 article { box-sizing : border-box; }를 넣어주면 된다.
+
+        box-sizing : border-box !!!!!!! border Width 포함 계산
+
+        float vs inline-block 레이아웃 배치
+        1. 1px도 오차가 없이 정확하게 해야한다. float : left; clear : both 등 사용해서 레이아웃
+        2. 적당하게 맞추면 된다. inline-block
+
+        상황에 따라 다르다
+    -->
+    <section>
+        <article>article</article>
+        <article>article</article>
+        <article>article</article>
+    </section>
+</body>
+</html>

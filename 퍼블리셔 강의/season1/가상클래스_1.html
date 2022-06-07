@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            list-style: decimal;
+        }
+        ul li.new:after{
+            content : 'new';
+            background-color: dodgerblue;
+            color : #fff;
+            border-radius: 3px;
+            font-size: 13px;
+            padding: 0 5px;
+            margin-left : 5px;
+        }
+
+        ul li.hot:before{
+            content : 'hot';
+            background-color: crimson;
+            color: #fff;
+            border-radius: 3px;
+            font-size: 13px;
+            padding: 0 5px;
+            margin-right : 5px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        가상클래스(before, after) 매우 유용하다!!
+         폼 엘리먼트 중 input, textarea, select만 가상클래스 :before :after를 못가지고 나머지는 가지 수 있습니다.
+           :before :after를 가질 수 있는 폼 요소(form, fieldset, legend, label, button)
+    -->
+    <ul>
+        <li class="hot">빅치킨마요 - 3,500원</li>
+        <li>돈치마요 - 3,500원</li>
+        <li>치킨 샐러드마요 - 3,5000원</li>
+        <li class="new">치킨마요 - 2,900원</li>
+    </ul>
+    
+</body>
+</html>

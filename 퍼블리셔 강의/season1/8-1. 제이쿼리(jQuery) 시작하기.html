@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../JS/jquery-1.12.4.js"></script>
+    <style>
+        a {
+            display: inline-block;
+            color: #000;
+            text-decoration: none;
+            background-color: #ddd;
+            text-align: center;
+            padding: 5px;
+        }
+
+        div {
+            background-color: dodgerblue;
+            height: 200px;
+            margin-top: 10px;
+            width: 230px;
+            color: #fff;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        div.active {
+            background-color: red;
+        }
+
+        .menu{
+            padding: 0;
+            list-style: none;
+            width: 200px;
+        }
+         
+        /* 
+            .menu a{ bacgkroun-color :#000 } 이런식으로 하면 .menu클래스 아래에 있는 모든 a태그에 적용되지만
+            나는 .menu클래스의 li태그 바로 밑에 있는 a태그만 지정하고 싶다. 
+            그 하위에 있는것들은 건들고 싶지 않다. 하면
+            .menu li > a{} 이렇게 사용하면 된다.(children 역할)
+        */
+        .menu li > a{
+            background-color: #000;
+            color: #fff;
+            display : block;
+            text-align: center;
+            padding: 5px;
+            border : 1px solid #000;
+        }
+        .sub-menu{
+            border : 1px solid #000;
+            display : none;
+        }
+        .sub-menu a{
+            display : block;
+            padding: 5px;
+        }
+    </style>
+    <script>
+        /* 
+            $('선택자').함수(function(){
+                실행구문;
+            });
+            
+            $('.btn').click(function(){
+                $('.modal').fadeIn();
+            });
+
+            선택자 종류
+             - css 클래스 선택자
+             - css 아이디 선택자
+             - css 태그 선택자
+             - this
+
+            필수 함수 종류
+             - click
+             - mouseenter
+             - mouseleave
+
+             필수 메서드 종류
+             - slideDown()
+             - slideUp()
+             - stop()
+             - show()
+             - hide()
+             - fadeIn()
+             - fadeOut()
+             - addClass()
+             - removeClass()
+             - children()
+             - siblings()
+             - toggleClass()
+
+             메서드(클래스 제어)
+             - addClass()
+             - removeClass()
+             - toggleClass()
+
+             메서드(요소 탐색)
+             $('선택요소').메서드(); >> 선택요소 기준
+             - .children() - 선택요소 기준으로 자식
+             - .parent() - 선택요소 기준으로 부모
+             - .siblings() - 선택요소 기준으로 형제
+             - .find() - 선택요소 기준으로 자손요소!!
+             - .next() - 선택요소 바로 다음에 있는 요소
+             - .prev() - 선택요소 바로 이전에 있는 요소
+
+             ** children vs find 
+            - find : 자손요소(여기서는 div > div밑에 있는 span 태그를 찾는것) [바로 밑에 + 그아래에 있는것들]
+            div span{
+                >> <div>
+                    <div>
+                        <span></span>       
+                    </div>
+                    <p></p>
+                   </div>
+            }
+            $('div').find('span') > div자손중에 span태그를 찾겠다.
+
+            - children : 바로 밑에 있는 자식만 검색
+        */
+
+
+
+        $(document).ready(function () {
+
+            //new ShowHideTag({'showBtn' : ".show-btn" , 'hideBtn' : ".hide-btn"}, 'p');
+
+            $('p').css({
+                'display': 'none'
+            });
+            $('.show-btn').click(function () {
+                $('p').css({
+                    'display': 'block'
+                });
+            });
+            $('.hide-btn').click(function () {
+                $('p').css({
+                    'display': 'none'
+                });
+            })
+
+            $('.show-btn1').click(function () {
+                $('div').show();
+            })
+
+            $('.hide-btn1').click(function () {
+                $('div').hide();
+            })
+
+            $('.mouse-btn1').mouseenter(function () {
+                $('div').show();
+            })
+
+            $('.mouse-btn1').mouseleave(function () {
+                $('div').hide();
+            })
+
+            $('.toggle-btn').click(function () {
+                $('div').toggle();
+            })
+
+            $('.slide-down-btn1').click(function () {
+                $('div').slideDown('fast');
+            })
+            $('.slide-up-btn1').click(function () {
+                $('div').slideUp('slow');
+            })
+            $('.slide-toggle-btn').click(function () {
+                $('div').slideToggle();
+            })
+
+            /*
+                $(셀렉터).fadeIn(속도)
+                $('slide-toggle-btn').fadeIn(); //기본속도
+                $('slide-toggle-btn').fadeIn(500); //0.5초
+                $('slide-toggle-btn').fadeIn('fast'); //빠르게
+                $('slide-toggle-btn').fadeIn('slow'); //느리게
+                $('slide-toggle-btn').fadeOut(3000); //3초
+             */
+
+            //addClass / removeClass / toggleClass
+            $('.add-btn').click(function () {
+                $('div.box').addClass('active');
+            })
+            $('.remove-btn').click(function () {
+                $('div.box').removeClass('active');
+            })
+            $('.toggle-btn2').click(function () {
+                $('div.box').toggleClass('active');
+                /* 
+                    TIP : .addClass('클래스명') <-- addClass / removeClass / toggleClass ()에 .클래스명이 아니라 그냥 클래스명만 적자
+                    다른건 다 . # 이렇게 적던데 왜 저기는 .클래스명 이 아닌 그냥 클래스명일까?
+                    그건 addClass 라고 뒤에 Class만 전용으로 사용하기 때문에 굳이 .(클래스)라고 알려줄 필요가 없기 때문
+                    
+                    만약에 $('div.box').children('.active') <-- 이렇게 별도로 클래스를 명시해주지 않는거는 .클래스명으로 써주던가 #아이디 쓰던가
+
+                */
+            })
+
+            //$('선택요소').children() <-- 선택요소의 바로 아래 단계인 자식요소만 선택
+            //$('선택요소').siblings() <-- 선택요소의 형제요소 선택
+            //주로 네비게이션만드는데 사용된다.
+
+
+
+        })
+    </script>
+</head>
+
+<body>
+    <a href="#none" class="show-btn">보이기</a>
+    <a href="#none" class="hide-btn">감추기</a>
+    <P>
+        태그선택자 a를 클릭했습니다.
+    </P>
+    <br><br>
+
+    <a href="#none" class="show-btn1">마우스 클릭 보이기</a>
+    <a href="#none" class="hide-btn1">마우슨 클릭 감추기</a>
+    <a href="#none" class="toggle-btn">마우스 토클 버튼</a>
+    <a href="#none" class="mouse-btn1">마우스 리브 감추기</a>
+
+    <a href="#none" class="slide-down-btn1">슬라이드 다운</a>
+    <a href="#none" class="slide-up-btn1">슬라이드 업</a>
+    <a href="#none" class="slide-toggle-btn">슬라이드 토글</a>
+
+    <a href="#none" class="add-btn">addClass 버튼</a>
+    <a href="#none" class="remove-btn">removeClass 버튼</a>
+    <a href="#none" class="toggle-btn2">toggleClass 버튼</a>
+
+    <div class="box">
+
+    </div>
+
+    <br>
+    <br>
+    <div>핵심 제이쿼리 요소탐색</div>
+    <ul class="menu">
+        <li>
+            <a href="#none">MENU-1</a>
+            <div class="sub-menu">
+                <a href="#none">SUB-MENU-1</a>
+                <a href="#none">SUB-MENU-2</a>
+                <a href="#none">SUB-MENU-3</a>
+                <a href="#none">SUB-MENU-4</a>
+            </div>
+        </li>
+        <li>
+            <a href="#none">MENU-2</a>
+            <div class="sub-menu">
+                <a href="#none">SUB-MENU-1</a>
+                <a href="#none">SUB-MENU-2</a>
+                <a href="#none">SUB-MENU-3</a>
+                <a href="#none">SUB-MENU-4</a>
+            </div>
+        </li>
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    color : #000;
+}
+
+a{
+    text-decoration : none;
+    color : #000;
+}
+
+h2{
+    margin: 30px;
+}
+
+.dropDown{
+    margin: 30px;
+    width : 400px;
+    text-align: center;
+}
+.dropDown .dropDownButton{
+    color: dodgerblue;
+    padding: 20px;
+    border : 1px solid black;
+    width: inherit;
+    cursor: pointer;
+}
+.dropDown .dropDownButton:hover{
+    background-color: dodgerblue;
+    color: white;
+}
+.dropDown .dropDownButton.clicked{
+    background-color: dodgerblue;
+    color : white;
+}
+
+.dropDown .dropDownMenu{
+    width: inherit;
+    border : 1px solid black;
+    display : none;
+}
+
+.dropDown .dropDownMenu.show{
+    display : block;
+}
+
+.dropDown .dropDownMenu a{
+    font-size: 18px;
+    display: block;
+    text-align : center;
+    padding: 20px;
+    border-bottom: 1px solid black;
+}
+
+.dropDown .dropDownMenu a:hover{
+    background-color: lightcoral;
+    color : white;
+}
+.dropDown .dropDownMenu a.select{
+    background-color: lightcoral;
+    color : white;
+}
+.dropDown .dropDownMenu a:last-child{
+    border-bottom : none;
+}
+
+

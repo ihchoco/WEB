@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로토타입방식으로 만들기</title>   
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        
+    </style>
+    <script>
+
+        //클래스를 설계하는 부분(붕어빵틀을 만드는 과정)
+        function Person(){
+            this.name = "신은혁";
+            this.age = 15;
+            this.address = "대구시";
+            
+        }
+
+        Person.prototype.displayPerson = function(){
+            document.write("name : "+this.name+" , age : "+this.age+" <br>");
+        };
+
+        //인스턴스를 생성
+        var person = new Person();
+        person.displayPerson();
+        person.age = 20;
+        person.displayPerson();
+
+        var person2 = new Person();
+        person2.displayPerson();
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

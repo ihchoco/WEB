@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 부모요소 position : relative */
+        /* 자식요소 position : absolute */
+
+        .parent{
+            background-color: dodgerblue;
+            width: 600px;
+            height: 300px;
+            position: relative;
+        }
+
+        .child{
+            background-color: crimson;
+            width: 200px;
+            height: 100px;
+            position : absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        .center{
+            background-color: crimson;
+            width: 200px;
+            height: 100px;
+            position : absolute;
+            top : 50%;
+            left : 50%;
+            transform: translate(-50%, -50%);
+            /* transform : 변형하다 */
+            /* translate : 번역하다, 이동하다 */
+            /* transfrom : translate(-50%, -50%)는 자신의 크기의 -50% x축, y축 이동하라 */
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child"></div>
+        <div class="center"></div>
+    </div>
+    <!--
+        CSS 포지셔닝 : 이것만 기억하면 OK (Postion : relative & absolute)
+        Relative : 부모요소에 주는것
+        Absolute : 자식요소에 주는것
+
+        .parent{
+            position : relative;
+        }
+
+        .child{
+            position : absolute;
+            right : 0;
+            bottom : 0;
+        }
+        
+        감싸고 있는게 부모
+        감싸져 있는게 자식
+    -->
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            border : 1px solid red;
+            width : 1200px;
+            margin : auto;
+        }
+        header{
+            background-color: skyblue;
+            overflow : hidden;
+        }
+        header article{
+            background-color: gray;
+            width: 300px;
+            height: 100px;
+        }
+        .logo{
+            float: left;
+        }
+        .navi{
+            /*float: right;*/
+        }
+
+
+        .box1{
+            background-color: yellowgreen;
+            height: 300px;
+        }
+        .box2{
+            background-color: greenyellow;
+            border: 5px solid blue;
+            overflow : hidden;
+        }
+        .box2 article{
+            width: 33.3333333%;
+            height: 300px;
+            float : left;
+        } 
+        .sub1{
+            background-color: darkgray;
+        }
+        .sub2{
+            background-color: lightgray;
+        }
+        .sub3{
+            background-color: lightslategray;
+        }
+        footer{
+            background-color: skyblue;
+            height: 100px;
+        }       
+    </style>
+</head>
+<body>
+    <!--
+        레이아웃을 잘만들면 자신이 생긴다!!! 
+
+        레이아웃 설계하는 HTML5 시멘틱 태그 사용법 [계층구조]
+        가장 상위의 컨테이너 : .container 또는 .wrapper [1] [div.container]
+        문서의 주요 내용을 지정 : main [여기서는 안쓰임] 
+        주제별 콘텐츠 영역 : section [2] [section]
+        헤더 영역(로고, 메뉴, 로그, 검색 등) : header [2] [header]
+        제작 정보 및 저작권 정보 표시 : footer [2] [footer]
+        콘텐츠 내용 넣기 : article [2] [article]
+        문서를 링크하는 탐색 영역 : nav [3]
+        세부 사항 요소 : summary / 추가 세부 정보를 정의 : details
+
+        !!!!! 핵심 !!!!
+        공통적인 부분은 한곳에 뭉쳐주자.
+        방금전에 sub1 , sub2 , sub3에 float : left를 각각 넣어두려고 했는데 강사님은
+        공통부분인 box2 article{ float : left; } 이런식으로 한곳에만 넣어준다.
+
+        즉, 공통으로 사용하는건 공통으로 넣어주자!!!
+    -->
+
+    <div class="container">
+        <header>
+            <article class="logo"></article>
+            <article class="navi"></article>
+        </header>
+        <section class="box1"></section>
+        <section class="box2">
+            <article class="sub1"></article>
+            <article class="sub2"></article>
+            <article class="sub3"></article>
+        </section>
+        <footer></footer>
+    </div>
+
+
+</body>
+</html>

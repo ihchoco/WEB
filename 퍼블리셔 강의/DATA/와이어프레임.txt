@@ -1,0 +1,17 @@
+header
+	nav
+		.logo > a > img
+		.gnb > (a * 5)
+		.lnb > a
+
+header
+	nav
+		.logo > a > img
+		.gnb > (a * 5)
+		.lnb > a
+
+header
+	nav
+		.gnb > (a * 5)
+		.lnb > a		
+		.logo > a > img

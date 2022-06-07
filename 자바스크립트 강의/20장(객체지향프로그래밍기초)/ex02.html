@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <style>
+        .tab-menu{
+            list-style:none;
+            height : 80px;
+        }
+        .tab-menu li{
+            width : 100px;
+            height : 40px;
+            overflow : hidden;
+            display : inline;
+            text-align : center;
+            line-height : 40px;
+            float : left;
+        }
+        .tab-menu li:hover{
+            border : 1px solid black;
+        }
+        .tab-menu li.select{
+            border : 1px solid black;
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <script>
+
+        //객체지향적 프로그래밍의 예
+        //코드의 재사용성이 매우 높다. 외부에서 접근할려면 인스턴스 변수를 가지고
+        //얼마든지 접근을 할 수가 있다.
+        $(document).ready(function(){
+            var tabMenu1 = new TabMenu("#tabMenu1");
+            var tabMenu2 = new TabMenu("#tabMenu2");
+
+            $("#btnReset").click(function(){
+                tabMenu1.clearItems();
+                tabMenu2.clearItems();
+            })
+        })
+
+        //탭메뉴 클래스 정의(설계)
+        function TabMenu(selector){
+            //this는 new라는 연산자로 메모리에 객체가 올라갔을때 사용할 수 있는것이다.
+            //함수에서 그냥 쓰는 this는 window객체라고 보면 된다. 만약 new를 안쓰고 TabMenu("#tabMenu1"); 쓰면 window {window: Window, self: Window, document: document, name: '', location: Location, …} 생성
+            console.log(this);
+            this.init(selector);
+            this.initEvent();
+        }
+
+        //요소 초기화
+        TabMenu.prototype.init = function(selector){
+            console.log("init호출");
+            //인스턴스가 생성이 되면 탭메뉴가 생성이 되고 li태그를 찾아와라.
+            this.tabMenu = $(selector);
+            this.$menuItems = this.tabMenu.find("li");
+            console.log(this.$menuItems);
+        }
+
+        //이벤트 초기화
+        TabMenu.prototype.initEvent = function(){
+            console.log("initEvent호출");
+            console.log(this);
+            var localThis = this;
+            console.log(this.$menuItems);
+            this.$menuItems.on("click", function(){
+                console.log(this);
+                //선택된 아이템의 인덱스를 가지고 메서드를 호출하고 있다.
+                localThis.setSelectMenuItemAt($(this).index());
+            });
+        }
+
+        //n번째 탬메뉴 선택
+        TabMenu.prototype.setSelectMenuItemAt = function(index){
+            this.$menuItems.removeClass("select");
+            this.$menuItems.eq(index).addClass("select");
+        }
+
+        //초기화 클릭시 이벤트 발생
+        TabMenu.prototype.clearItems = function(){
+            this.$menuItems.removeClass("select");
+        }
+
+
+    </script>
+</head>
+<body>
+    <button id="btnReset">초기화</button>
+    <p>첫번째 탭메뉴</p>
+    <ul class="tab-menu" id="tabMenu1">
+        <li class="menuitem1">google</li>
+        <li class="menuitem2">facebook</li>
+        <li class="menuitem3">amazon</li>
+        <li class="menuitem4">tesla</li>
+        <li class="menuitem5">apple</li>
+        <li class="menuitem6">naver</li>
+    </ul>
+
+    <p>두번째 탭메뉴</p>
+    <ul class="tab-menu" id="tabMenu2">
+        <li class="menuitem1">google</li>
+        <li class="menuitem2">facebook</li>
+        <li class="menuitem3">amazon</li>
+        <li class="menuitem4">tesla</li>
+        <li class="menuitem5">apple</li>
+        <li class="menuitem6">naver</li>
+    </ul>
+    
+</body>
+</html>

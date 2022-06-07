@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin : 100px;
+        }
+        .tab{
+            border : 1px solid #000;
+            width: 400px;   
+        }
+        .tab a{
+            display: block;
+            color : #333;
+            text-decoration: none;
+            margin: 5px;
+            border-bottom: 1px solid #000;
+        }
+        /* 
+            :first-child , :last-child, :before, :after 는 뒤에 ()가 없다.
+            :nth-child() , :nth-of-type() 는 뒤에 ()가 있고 숫자가 들어온다.
+        */
+        .tab a:last-child{
+            border-bottom: none;
+        }
+        .btn span{
+            background-color: #ddd;
+            width: 120px;
+            display: inline-block;
+            text-align: center;
+            padding: 5px;
+            border-radius: 5px 5px 0 0;
+            cursor : pointer;
+            border : 1px solid #000;
+            /* 
+                inline-block의 경우 알수없는 Margin이 (5~6px) 정도 있음
+                그래서 이거를 붙여주는게 필요하다.
+                margin-right : -7px;
+            */
+            margin-right:-7px;
+        }
+        .btn span:first-child{
+            background-color: #fff;
+        }
+        .btn span:last-child{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="tab-inner">
+        <div class="btn">
+            <span>공지사항</span>
+            <span>갤러리</span>
+        </div>
+        <div class="tab">
+            <a href="#none">SMS 발송 서비스 개선작업</a>
+            <a href="#none">SMS 발송 서비스 개선작업</a>
+            <a href="#none">SMS 발송 서비스 개선작업</a>
+            <a href="#none">SMS 발송 서비스 개선작업</a>
+            <a href="#none">SMS 발송 서비스 개선작업</a>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
