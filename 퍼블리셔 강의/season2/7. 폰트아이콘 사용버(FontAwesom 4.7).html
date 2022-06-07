@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://use.fontawesome.com/2c3d88347a.js"></script>
+    <!-- 
+        html header와 header 사이에 연결하는 방법 아래와 같이 또는 css에 넣을수도 있다. 
+        1번 방법
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css"> 
+        2번 방법
+        <style>
+            @import url('https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css');
+        </style>
+        3번 방법[이것만 사용]
+        <script src="https://use.fontawesome.com/2c3d88347a.js"></script> 
+    -->
+    <style>
+        /* i로 주게 되면 뒤에 important붙여줘야하니 클래스 사용하자 */
+        .fa{
+            font-size : 100px;
+            color: crimson;
+            /* transform: rotate(90deg); */
+            background-color: blue;
+            padding: 20px;
+            border-radius: 50%;
+            /* display: inline-block; */
+            width: 200px;
+            height: 200px;
+            text-align:center;
+            line-height : 200px;
+            box-shadow : 0 0 20px black;
+            /* 폰트어썸은 dipslay : inline-block이며 text-align / line-height로 수평 수직 조절 */
+        }   
+
+        /* 폰트어썸 유니코드 사용법  */
+        .box{
+            border : 1px solid black;
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+        .box:before{
+            /* !!!!!유니코드 앞에 역슬래쉬(\+유니코드명) 붙여줘야한다. + 밑에 font-family : fontawesome; 을 해줘야한다. */
+            content : '\f0c9';
+            font-family: 'fontawesome';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background-color: black;
+            color : white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px; 
+        }
+    </style>
+</head>
+<body>
+    <!-- CSS Framework 중 하나 => 폰트어썸 -->
+    <!-- 폰트어썸은 벡터방식이기 때문에 아무리 크기를 조절해도 깨지지 않는다. -->
+    <i class="fa fa-bars" aria-hidden="true"></i>
+    
+    <div class="box"></div>
+</body>
+</html>
