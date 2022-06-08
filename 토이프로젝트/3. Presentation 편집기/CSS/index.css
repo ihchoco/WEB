@@ -1,0 +1,85 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.container{
+    color : black;
+    fotn-size : 14px;
+    margin: 20px;
+}
+
+.container article{
+    border : 1px solid black;
+}
+.container .hero{
+    background-color: dodgerblue;
+}
+.container .hero h2{
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+.container .palette{
+    height: 600px;
+    border-top : none;
+    position: relative;
+}
+.container .palette .box{
+    position: absolute;
+    padding: 30px;
+    border : 1px solid black;
+    top : 40px;
+    left : 40px;
+}
+.container .palette .box:hover{
+    background-color: dodgerblue;
+    color:white;
+    cursor: pointer;
+}
+.container .palette .box.click{
+    background-color: dodgerblue;
+    color:white;
+}
+.container .palette .infoBoxContainer{
+    position: absolute;
+    top : 0;
+    right : 0;
+    display : block;
+}
+.container .palette .infoBox{
+    display :none;
+    border: 1px solid black;
+    position: absolute;
+    width: 200px;
+    top : 0;
+    right : 200;
+    color: black;
+}
+.container .palette .infoBox.show{
+    display : block;
+}
+.container .palette .infoBox div{
+    padding: 20px;
+    border-bottom: 1px solid black;
+}
+.container .palette .infoBox div:last-child{
+    border-bottom: none;
+}
+.container .palette .infoBox div:hover{
+    background-color: grey;
+    color: white;
+}
+
+
+.container .footer{
+    height: 100px;
+    border-top : none;
+}
+

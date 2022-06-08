@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프레젠테이션</title>
+    <link rel="stylesheet" href="CSS/index.css">
+    
+</head>
+<body>
+
+    <div class="container">
+        <article class="hero">
+            <h2>UI/UX 디자인 편집기</h2>
+        </article>
+        <article class="palette">
+            <div class="box" id="box">
+                BOX
+                <div class="infoBoxContainer">
+                    <div class="infoBox" id="infoBox">
+                        <div class="info">
+                            휴지통으로 이동하기
+                        </div>
+                        <div class="info">
+                            파일 복사하기
+                        </div>
+                        <div class="info">
+                            파일 붙여넣기
+                        </div>
+                        <div class="info">
+                            크기 조절하기
+                        </div>
+                        <div class="info">
+                            속 성
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </article>
+        <article class="footer">
+
+        </article>
+    </div>
+
+    <!-- script import -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="JS/app.js"></script>
+    <script>
+        $(document).ready(function(){
+            new Box({
+                selector : '#box'
+            });
+        });
+    </script>
+</body>
+</html>
