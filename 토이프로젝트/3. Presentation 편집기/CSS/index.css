@@ -8,6 +8,10 @@ a{
     text-decoration: none;
     color: black;
 }
+img{
+    width: 100%;
+    height: 100%;
+}
 
 .container{
     color : black;
@@ -82,4 +86,23 @@ a{
     height: 100px;
     border-top : none;
 }
+.container .footer .docIcon{
+    width : 100px;
+    height : 100px;
+    padding : 5px 20px;
+    text-align: center;
+    display : inline-block;
+}
+.container .footer .docIcon:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.container .footer .docIcon .imageBox{
+    width : 60px;
+}
+.container .footer .docIcon span{
+    
+}
+
 
