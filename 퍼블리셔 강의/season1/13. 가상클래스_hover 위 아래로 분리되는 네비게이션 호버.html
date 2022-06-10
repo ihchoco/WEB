@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-weight: 300;
+            margin: 0;
+            background-color: #222;
+            font-size: 15px;
+        }
+        .container{
+            display : flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .items{
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+        .item{
+            width: 300px;
+            height: 200px;
+            display: inline-block;
+            position: relative;
+            margin: 7px;
+        }
+        /* 공통적으로 들어가는 곳 */
+        .front, 
+        .back{
+            position : absolute;
+            transition: 0.5s;
+            top: 0;
+        }
+        .front{
+            height: inherit;
+            background-color: #333;
+            text-align: center;
+            z-index: 1;
+            width: 100%;
+        }
+        .item:hover .front img{
+            animation: ani 1s linear infinite;
+        }
+        .front h2{
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .back{
+            background-color: #fff;
+            color: #000;
+            height: inherit;
+            text-align:center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .back p{}
+        .back a{
+            background-color: yellowgreen;
+            color:#fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        .back a:hover{
+            background-color: #000;
+        }
+        .item:hover .front{
+            top : -50%
+        }
+        .item:hover .back{
+            top: 50%;
+        }
+
+        @keyframes ani{
+            0%, 100%{
+                transform : scale(0.7)
+            }
+            50%{
+               transform: scale(1); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="items">
+            <div class="item">
+                <div class="front">
+                    <img src="../Image/newbtn.bar.1.png" alt="">
+                    <h2>메뉴</h2>
+                </div>
+                <div class="back">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        Illum perspiciatis architecto ipsa autem consectetur explicabo 
+                    </p>
+                    <a href="#none">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: royalblue;
+        }
+        a{
+            color: #222;
+            text-decoration: none;
+        }
+        .gnb{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left : 10%;
+        }
+        .gnb a{
+            display: block;
+            font-size : 40px;
+            margin : 20px 0;
+            color: #fff;
+            transition: 0.5s;
+        }
+        .gnb:hover a{
+            opacity: 0.3;
+        }
+        .gnb a:hover{
+            opacity: 1;
+        }
+        .gnb a:before{
+            content: '>';
+            margin-right: 10px;
+            opacity: 0;
+        }
+        .gnb a:hover:before{
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="gnb">
+        <a href="#none">New Arivals</a>
+        <a href="#none">Summer Collection</a>
+        <a href="#none">Winter Collection</a>
+        <a href="#none">Special Offers</a>
+        <a href="#none">Trends</a>
+    </div>
+</body>
+</html>
