@@ -12,11 +12,17 @@
 
     <div class="container">
         <article class="hero">
-            <h2>UI/UX 디자인 편집기</h2>
+            <span>로고</span>
+            <span>토, 6월 11 8:42 오후</span>
+            <span>배터리</span>
+            <span>검색</span>
         </article>
         <article class="palette">
-            <div class="box" id="box">
-                BOX
+            <!-- <div class="box" id="box">
+                <div class="iconImage">
+                    <img src="../Image/file.png" alt="파일아이콘">
+                </div>
+                <span class="boxTitle">Helloworld.txt</span>
                 <div class="infoBoxContainer">
                     <div class="infoBox" id="infoBox">
                         <div class="info" id="trashBinBtn">
@@ -36,8 +42,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
+            </div> -->
+            <!-- <div class="program" id="program">
+                <div class="top">
+                    <span>프로그램 이름</span>
+                    <span id="closeBtn">X</span>
+                </div>
+                <div class="content">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Est delectus sapiente enim illum rerum modi sit repellat, vero sequi eaque, dicta, quasi maxime in voluptates aut. Consequatur eligendi corrupti tempore.
+                </div>
+                <div class="bottom">
+                        <span>length : 100byte /</span>
+                        <span>last-date : 2022-06-11 09:12:32</span>
+                </div>
+            </div> -->
         </article>
         <article class="footer">
             <div class="docIcon">
@@ -50,18 +68,50 @@
                     <img src="../Image/notebook.png">
                 </div>
             </div>
+            <div class="docIcon">
+                <div class="imageBox">
+                    <img src="../Image/calculator.png">
+                </div>
+            </div>
         </article>
     </div>
 
+    <!-- FontAwesome -->
+    <script src="https://use.fontawesome.com/2c3d88347a.js"></script>
     <!-- script import -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script src="JS/app.js"></script>
+    <script src="JS/box.js"></script>
     <script>
         $(document).ready(function(){
-            new Box({
-                selector : '#box'
-            });
+            //전역객체 생성[모든 객체의 정보를 담고있음]
+            var allObjList = [];
+
+            // 배경객체 생성
+            new Palette({
+                selectorId : 'palette'
+            })
+
+            // new InfoBox({});
+            for(var i = 0; i < 5; i++){
+                let temp = new Box({
+                    allObjList : allObjList,
+                    selectorId : getOnlyId(),
+                    title : "Helloworld"+i,
+                    type : "txt",
+                    content : `
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo accusamus quod minus harum impedit consectetur, eius error expedita quidem! Eos quo dolor officiis tempora aliquam beatae, dignissimos quam velit laborum.
+                    `
+                });
+                allObjList.push(temp);
+            }
+            console.log(allObjList);
+
         });
+
+        function getOnlyId(){
+            return `box_${Date.now()}`;
+        }
     </script>
+    
 </body>
 </html>

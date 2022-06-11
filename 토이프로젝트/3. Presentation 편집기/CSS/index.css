@@ -14,42 +14,60 @@ img{
 }
 
 .container{
-    color : black;
+    color : white;
     fotn-size : 14px;
-    margin: 20px;
+    background-image: url('../../Image/mac_background3.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+    height: 833px;
 }
 
 .container article{
-    border : 1px solid black;
 }
 .container .hero{
-    background-color: dodgerblue;
+    border-bottom: 1px solid rgba(46, 45, 45, 0.671);
+    background-color: rgba(46, 45, 45, 0.671);
+    padding: 10px;
 }
 .container .hero h2{
     text-align: center;
-    padding: 20px;
+    padding: 5px;
     color: white;
 }
 .container .palette{
     height: 600px;
+    height: 80vh;
     border-top : none;
     position: relative;
+
 }
 .container .palette .box{
-    position: absolute;
-    padding: 30px;
-    border : 1px solid black;
-    top : 40px;
-    left : 40px;
+    /* position: absolute;
+    top : 20px;
+    left : 20px; */
+    position: relative;
+    display : inline-block;
+    text-align: center;
+    margin: 20px 10px;
+    z-index: 10;
 }
-.container .palette .box:hover{
-    background-color: dodgerblue;
-    color:white;
+.container .palette .box .iconImage{
+    width : 70px;
+    height: 70px;
+    overflow: hidden;
+}
+.container .palette .box .boxTitle{
+    display: block;
+    font-size: 12px;
+}
+.container .palette .box:hover {
     cursor: pointer;
+    opacity: 1;
 }
 .container .palette .box.click{
-    background-color: dodgerblue;
-    color:white;
+    /* background-color: dodgerblue; */
+    opacity: 0.5;
 }
 .container .palette .infoBoxContainer{
     position: absolute;
@@ -59,50 +77,105 @@ img{
 }
 .container .palette .infoBox{
     display :none;
-    border: 1px solid black;
+    border: 1px solid white;
     position: absolute;
     width: 200px;
     top : 0;
     right : 200;
-    color: black;
+    color: white;
+    z-index: 10;
+    border-radius: 10px;
 }
 .container .palette .infoBox.show{
     display : block;
 }
 .container .palette .infoBox div{
-    padding: 20px;
-    border-bottom: 1px solid black;
+    padding: 15px 20px;
+    border-bottom: 1px solid white;
 }
 .container .palette .infoBox div:last-child{
     border-bottom: none;
 }
 .container .palette .infoBox div:hover{
-    background-color: grey;
+    background-color: rgb(8, 8, 8);
     color: white;
 }
 
+.container .program{
+    display: block;
+    position: absolute;
+    border : 1px solid white;
+    z-index: 1;
+    top: 55%;
+    left: 50%;
+    width: 700px;
+    transform: translate(-50%, -50%);
+    overflow : hidden;
+    border-radius: 10px;
+}
+.container .program .top{
+    border-bottom: 1px solid white;
+    padding: 10px 20px;
+    display : flex;
+    justify-content: space-between;
+    background-color: cornflowerblue;
+    color: white;
+}
+.container .program .top span{
+    display: inline-block;
+    font-size : 14px;
+}
+.continaer .program #closeBtn{
+    cursor: pointer;
+    font-weight : bold;
+}
+.container .program .content{
+    padding: 20px;
+    border-bottom: 1px solid white;
+    height: 400px;
+    background-color: rgba(141, 137, 137, 0.712);
+}
+.container .program .bottom{
+    padding: 5px;
+    font-size : 14px;
+    float : right;
+}
 
 .container .footer{
     height: 100px;
-    border-top : none;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    border-radius: 20px;
+    border : 1px solid rgba(148, 143, 143, 0.671);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
 }
 .container .footer .docIcon{
     width : 100px;
     height : 100px;
-    padding : 5px 20px;
+    padding: 10px 20px ;
     text-align: center;
-    display : inline-block;
+    transition: 0.5s;
+    display: block;
+
 }
 .container .footer .docIcon:hover{
     opacity: 0.5;
     cursor: pointer;
+    transform: scale(0.8);
 }
 
 .container .footer .docIcon .imageBox{
-    width : 60px;
+    width : 95%;
+    text-align: center;
 }
 .container .footer .docIcon span{
     
 }
+
 
 
