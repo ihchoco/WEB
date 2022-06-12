@@ -15,6 +15,7 @@ function Box(options){
     this.selectorId = null;
     this.size = null;
     this.content = null;
+    this.date = null;
 
     //BOX 기능을 위한 초기값 셋팅
     this.moveToTrashBinBtn = null;
@@ -43,6 +44,7 @@ Box.prototype.optionSet = function(options){
     this.type = options.type;
     this.size = options.size;
     this.content = options.content;
+    this.date = options.date;
     //showInfo 붙이기
     this.menuItems = [
         {
@@ -122,10 +124,13 @@ Box.prototype.initEvent = function(){
     // 휴지통 이동버튼 기능 연결
     this.moveToTrashBinBtn.on('click', function(){
         _this.moveToTrashBin();
+        $('.infoBox').removeClass('show');
     })
 
     this.runProgramBtn.on('click', function(){
         _this.runProgram();
+        $('.infoBox').removeClass('show');
+        
     })
 
 }
@@ -154,12 +159,16 @@ Box.prototype.moveToTrashBin = function(){
 }
 
 Box.prototype.runProgram = function(){
+    console.log("!!!! newProgram 실행");
+    console.log(this.box);
     new Program({
         selectorId : `program_${this.type}_${this.selectorId}`,
         title : this.title,
         type : this.type,
         content : this.content,
-        originalObjectId : this.selectorId,
+        originObj : this,
+        size : this.size,
+        date : this.date
     });
 }
 
@@ -228,6 +237,8 @@ function ProgramBox(options){
     this.backgroundColor = null;
     this.color = null;
     this.borderColor = null;
+    this.originObj = null;
+    this.date = null;
 
 }
 
@@ -276,8 +287,8 @@ function Program(options){
     this.borderColor = null;
     this.menuItems = null;
     this.selectorId = null;
-    this.lastChangeDate = null;
-    this.originalObjectId = null; //핵심 객체(부모)
+    this.date = null;
+    this.originObj = null; //핵심 객체(부모)
 
     //content에 들어갈 내용
     this.title = null; //아이콘 이름
@@ -293,7 +304,6 @@ function Program(options){
     this.makeProgram(); //HTML DOM 만들기
     this.init(options);
     
-    
 }
 
 Program.prototype.optionSet = function(options){
@@ -306,13 +316,16 @@ Program.prototype.optionSet = function(options){
     this.backgroundColor = options.backgroundColor;
     this.color = options.color;
     this.borderColor = options.borderColor;
-    this.originalObjectId = options.originalObjectId; //부모 객체
+    this.date = options.date;
+    this.originObj = options.originObj; //부모 객체
 
     this.title = options.title;
     this.content = options.content;
     this.type = options.type;
     this.size = options.size;
 
+    console.log("====프로그램=====");
+    console.log(this.originalObjectId);
 }
 
 Program.prototype.makeProgram = function(){
@@ -322,12 +335,24 @@ Program.prototype.makeProgram = function(){
     let program = $(`<div id='${this.selectorId}' class='program'></div>`);
     let top = $(`<div class='top'><span>${this.title}</span><span id='closeBtn'>X</span></div>`);
     let content = $(`<div class='content' contenteditable="true">${this.content}</div>`);
-    let bottom = $(`<div class='bottom><span>length : ${this.size}byte / </span>
-    <span>last-date : ${this.date}</span></div>'`);
+    let bottom = $(`<div class='bottom'></div>`);
+    let bottomSpan = $(`<span>length : ${this.size}byte / </span><span>last-date : ${this.date}</span>`);
+
+    //let bottom = $(`<div class='bottom><span>length : ${this.size}byte </span>
+    //<span>last-date : ${this.date}</span></div>`);
 
     program.append(top);
     program.append(content);
     program.append(bottom);
+    
+    bottom.append(bottomSpan);
+
+    program.append(bottom);
+    
+    console.log(top);
+    console.log(content);
+    console.log(bottom);
+    console.log(bottomSpan);
 
     //Palette에 만든 DOM 붙이기
     $('.palette').append(program);
@@ -349,7 +374,9 @@ Program.prototype.initEvent = function(options){
     var _this = this;
     
     //draggable 할수있게 해주자
-    //this.program.draggable();
+    this.program.draggable({
+        handle : '.top'
+    });
     this.closeBtn.on('click', function(){
         _this.closeProgram();
     })
@@ -357,12 +384,18 @@ Program.prototype.initEvent = function(options){
 
 Program.prototype.closeProgram = function(){
 
+    console.log("closeProgram");
     // 제거하기전 정보를 다시 BOX객체에 던져주기
-    alert(this.originalObjectId);
+    console.log(this.originObj);
+    let content = this.program.find('.content').text();
+    let date = new Date().toLocaleString();
+    
 
     //닫기 전 (수정된) 정보 전달하기
+    this.originObj.content = content;
+    this.originObj.date = date;
 
+    console.log(this.orginOBj);
 
     this.program.remove(); //DOM에서 제거하기
-    console.log(this.program);
 }

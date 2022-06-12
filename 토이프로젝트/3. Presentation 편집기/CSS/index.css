@@ -20,7 +20,8 @@ img{
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;
-    height: 833px;
+    /* height: 833px; */
+    height: 100vh;
 }
 
 .container article{
@@ -35,6 +36,97 @@ img{
     padding: 5px;
     color: white;
 }
+.container .hero .faq-btn{
+    float : right;
+    margin: 5px 20px;
+    border : 1px solid white;
+    padding: 5px;
+    margin-top : -5px;
+}
+.container .hero .faq-btn:hover{
+    background-color: dodgerblue;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* 
+ * MODAL AND FAQ 
+ *
+*/
+.modal{
+    position : fixed;
+    background-color : rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display : none;
+    z-index: 100;
+}
+.modal-content{
+    background-color: #FFEB60;
+    width: 800px;
+    border-radius : 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    box-shadow: 0 0 15 rgba(0, 0, 0, 0.15);
+    text-align : center;
+    color: black;
+}
+.modal-content .btn-close{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.faq {
+    
+}
+.faq-inner{
+    width: 750px;
+    margin: auto;
+}
+.faq-inner h1{
+    text-align : center;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.accordion{}
+.accordion-item{
+    background-color: #fff;
+    padding: 15px 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.2);
+    margin-bottom: 17px;;
+}
+.accordion-item .title{
+    font-weight: bold;
+    cursor: poiner;
+}
+.accordion-item .title:after{
+    content : '>';
+    transform: rotate(90deg);
+    float: right;
+    transition: 0.5s;
+    margin-top: -2px;
+}
+.accordion-item .title.active{
+    padding-bottom: 15px;
+}
+.accordion-item .title.active:after{
+    transform: rotate(270deg);
+}
+.accordion-item .content{
+    border-top: 1px solid #000;
+    font-size : 16px;
+    padding-top: 15px;
+    display : none;
+}
+
 .container .palette{
     height: 600px;
     height: 80vh;
@@ -103,13 +195,13 @@ img{
 
 .container .program{
     display: block;
-    position: absolute;
     border : 1px solid white;
     z-index: 1;
-    top: 55%;
-    left: 50%;
+    top: 10;
+    left: 30%;
     width: 700px;
-    transform: translate(-50%, -50%);
+    position: absolute;
+
     overflow : hidden;
     border-radius: 10px;
 }

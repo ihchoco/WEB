@@ -16,6 +16,7 @@
             <span>토, 6월 11 8:42 오후</span>
             <span>배터리</span>
             <span>검색</span>
+            <span class="faq-btn" id="faqBtn">FAQ</span>
         </article>
         <article class="palette">
             <!-- <div class="box" id="box">
@@ -74,6 +75,37 @@
                 </div>
             </div>
         </article>
+        
+        <!-- Modal F&Q -->
+        <div class="modal" id="faq-modal">
+            <div class="modal-content">
+                <a href="#none" class="btn-close" id="faqCloseBtn">X</a>
+                <div class="faq">
+                    <div class="faq-inner">
+                        <h1>자주 묻는 질문</h1>
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="title">이게 무엇인가요?</div>
+                                <div class="content">브라우저에서 업무에 필요한 기본 기능을 GUI화면으로 보여주기 위해 만들었습니다.</div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="title">어떻게 사용하는가?</div>
+                                <div class="content">컴퓨터배경화면 처럼 사용</div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="title">왜 만들었는가?</div>
+                                <div class="content">공부한 내용 복습 및 공부를 하면서 새로 배우는것들을 적용하기 위한 환경을 만들고 싶어서 </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="title">앞으로의 방향은 어떻게 되는가?</div>
+                                <div class="content">현재 기본적인 HTML+CSS+JAVASCRIPT+jQuery 위주로 학습한 내용을 바탕으로 만들고 있으며 추후 백엔드 / DevOps학습하여 VDI처럼 비슷하게 사용할 수 있도록 방향성을 잡고 공부할 예정 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
     </div>
 
     <!-- FontAwesome -->
@@ -100,7 +132,9 @@
                     type : "txt",
                     content : `
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo accusamus quod minus harum impedit consectetur, eius error expedita quidem! Eos quo dolor officiis tempora aliquam beatae, dignissimos quam velit laborum.
-                    `
+                    `,
+                    size : '2MB',
+                    date : getNow()
                 });
                 allObjList.push(temp);
             }
@@ -111,6 +145,29 @@
         function getOnlyId(){
             return `box_${Date.now()}`;
         }
+        function getNow(){
+            return new Date().toLocaleString();
+        }
+
+        // MODAL AND FAQ
+        $('#faqBtn').click(function(){
+            $('#faq-modal').css({
+                'display' : 'block'
+            });
+        })
+        $('#faqCloseBtn').click(function(){
+            $('#faq-modal').css({
+                'display' : 'none'
+            });
+        })
+        $('.accordion-item .title').click(function(){
+            // $(this).next().stop().slideToggle(300);
+            $(this).siblings('.content').stop().slideToggle(300);
+            $(this).toggleClass('active');
+        })
+        $('.accordion-item .content').click(function(){
+            $(this).stop().slideUp(300);
+        })
     </script>
     
 </body>
