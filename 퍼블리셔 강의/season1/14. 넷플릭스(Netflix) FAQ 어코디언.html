@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>넷플릭스 FAQ 어코디언</title>
+    <style>
+        body{
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            left: 1.6em;
+            font-weight: 300;
+            color: #fff;
+        }
+        a{
+            text-decoration: none;
+            color: gainsboro;
+        }
+        /* NETFLIX FAQ ACCORDION */
+        .faq{
+            height: 100vh;
+        }
+        .faq-inner{
+            width: 700px;
+            margin: auto;
+        }
+        .faq-inner h1{
+            text-align: center;
+            font-size: 50px;
+            font-weight: 500;
+        }
+        .accordion{
+            font-size: 26px;
+        }
+        .accordion .title,
+        .accordion .content{
+            background-color: #303030;
+            padding: 10px 15px;
+            margin-bottom: 7px;
+        }
+        .accordion .title{
+            cursor: pointer;
+        }
+        .accordion .title:after{
+            content : '+';
+            float: right;
+            transition: 0.5s;
+        }
+        .accordion .title.active{
+            background-color: rgb(190, 45, 45);
+        }
+        .accordion .title.active:after{
+            transform: rotate(45deg);
+        }
+        .accordion .content{
+            display: none;
+        }
+
+        .newsletter {
+            width: 90%;
+            margin: auto;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .newsletter p {
+            font-size: 20px;
+        }
+        .newsletter div {
+            display: flex;
+            align-items: center;
+        }
+        .newsletter div input[type=email],
+        .newsletter div button{
+            border: none;
+            outline: none;
+            height: 60px;
+            vertical-align: middle; 
+            /* vertical-align : 버튼들이 안맞을때 */
+            font-size : 20px;  
+            
+        }
+        .newsletter div input[type=email]{
+            flex: 3;
+        }
+        .newsletter div button {
+            background-color: #e84118;
+            color: #fff;
+            cursor: pointer;
+            flex: 1;
+        }
+        .newsletter div button:after{
+            content : '>';
+            font-size : 30px;
+            display: inline-block;
+            transform: translateY(3px);
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            // 처음에 미리 1번째거 열어놓는 방법
+            $('.accordion .content').eq(0).show();
+
+            $('.accordion .title').click(function(){
+                $(this).siblings('.accordion .content').slideUp();
+                // $(this).next().stop().slideToggle('fast');
+                // $(this).next().stop().slideToggle(1000);
+                $(this).next().stop().slideToggle();
+
+                $(this).siblings('.accordion .title').removeClass('active');
+                $(this).toggleClass('active');
+            })
+        });
+    </script>
+</head>
+<body>
+    <section class="faq">
+        <div class="faq-inner">
+            <h1>자주 묻는 질문</h1>
+            <div class="accordion">
+                <div class="title active">넷프릭스란 무엇인가요?</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci neque facilis saepe qui impedit soluta ducimus obcaecati eligendi exercitationem iste alias odit similique ea ab, id ratione voluptatibus? Architecto, soluta.</div>
+                <div class="title">넷프릭스란 무엇인가요?</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci neque facilis saepe qui impedit soluta ducimus obcaecati eligendi exercitationem iste alias odit similique ea ab, id ratione voluptatibus? Architecto, soluta.</div>
+                <div class="title">넷프릭스란 무엇인가요?</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci neque facilis saepe qui impedit soluta ducimus obcaecati eligendi exercitationem iste alias odit similique ea ab, id ratione voluptatibus? Architecto, soluta.</div>
+                <div class="title">넷프릭스란 무엇인가요?</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci neque facilis saepe qui impedit soluta ducimus obcaecati eligendi exercitationem iste alias odit similique ea ab, id ratione voluptatibus? Architecto, soluta.</div>
+                <div class="title">넷프릭스란 무엇인가요?</div>
+                <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci neque facilis saepe qui impedit soluta ducimus obcaecati eligendi exercitationem iste alias odit similique ea ab, id ratione voluptatibus? Architecto, soluta.</div>
+            </div>
+            <div class="newsletter">
+                <p>
+                    시청할 준비가 되셨나여? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.
+                </p>
+                <div>
+                    <input type="email" placeholder="이메일 주소">
+                    <button>시작하기</button>
+                </div>
+            </div>
+        </div>
+    </section>    
+</body>
+</html>
