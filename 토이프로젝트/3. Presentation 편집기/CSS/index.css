@@ -230,7 +230,23 @@ img{
 .container .program .bottom{
     padding: 5px;
     font-size : 14px;
-    float : right;
+    text-align: end;
+}
+
+/* 프로그램(휴지통) */
+
+.container .trashbin{
+    border: 1px solid rgb(115, 106, 106);
+    z-index: 100;
+}
+.container .trashbin .top{
+    background-color: rgb(83, 117, 212);
+}
+.container .trashbin .content{
+    background-color: rgb(34, 34, 34);
+}
+.container .trashbin .bottom{
+    background-color: #1c76c1;
 }
 
 .container .footer{

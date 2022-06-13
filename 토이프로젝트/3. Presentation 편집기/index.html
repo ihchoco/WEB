@@ -44,7 +44,8 @@
                     </div>
                 </div>
             </div> -->
-            <!-- <div class="program" id="program">
+            <!-- 프로그램(메모) 
+            <div class="program" id="program">
                 <div class="top">
                     <span>프로그램 이름</span>
                     <span id="closeBtn">X</span>
@@ -57,9 +58,23 @@
                         <span>last-date : 2022-06-11 09:12:32</span>
                 </div>
             </div> -->
+            <!-- 프로그램(휴지통) -->
+            <!-- <div class="program trashbin" id="program">
+                <div class="top">
+                    <span >휴지통</span>
+                    <span id="closeBtn">X</span>
+                </div>
+                <div class="content">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Est delectus sapiente enim illum rerum modi sit repellat, vero sequi eaque, dicta, quasi maxime in voluptates aut. Consequatur eligendi corrupti tempore.
+                </div>
+                <div class="bottom">
+                        <span>length : 100byte /</span>
+                        <span>last-date : 2022-06-11 09:12:32</span>
+                </div>
+            </div> -->
         </article>
         <article class="footer">
-            <div class="docIcon">
+            <div class="docIcon" id="trashBinIcon">
                 <div class="imageBox">
                     <img src="../Image/trash-bin.png">
                 </div>
@@ -106,6 +121,8 @@
                 
             </div>
         </div>
+
+
     </div>
 
     <!-- FontAwesome -->
@@ -114,6 +131,8 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="JS/box.js"></script>
     <script>
+        
+
         $(document).ready(function(){
             //전역객체 생성[모든 객체의 정보를 담고있음]
             var allObjList = [];
@@ -130,9 +149,7 @@
                     selectorId : getOnlyId(),
                     title : "Helloworld"+i,
                     type : "txt",
-                    content : `
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo accusamus quod minus harum impedit consectetur, eius error expedita quidem! Eos quo dolor officiis tempora aliquam beatae, dignissimos quam velit laborum.
-                    `,
+                    content : `hello world`,
                     size : '2MB',
                     date : getNow()
                 });
@@ -168,6 +185,35 @@
         $('.accordion-item .content').click(function(){
             $(this).stop().slideUp(300);
         })
+
+        // DOC 프로그램 실행
+        $("#trashBinIcon").click(function(){
+            new TrashBin({
+                selectorId : getOnlyId(),
+                title : '휴지통',
+                trashBinList : superTrashBin
+            });
+        })
+
+        // 슈퍼 전체 완전 객체를 한개를 만들어서 관리하자
+        // TrashBin을 위한 슈퍼 완전 객체를 만들어서 항상 refresh되도록 하자
+
+        /*
+        new TrashBin({
+            selectorId : getOnlyId(),
+            title : '휴지통',
+            trashBinList : [
+                {
+                    selectorId : getOnlyId(),
+                    title : "Helloworld",
+                    type : "txt",
+                    content : `hello world`,
+                    size : '2MB',
+                    date : getNow()
+                }
+            ]
+        })
+        */
     </script>
     
 </body>
