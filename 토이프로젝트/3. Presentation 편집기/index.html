@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>프레젠테이션</title>
+    <title>업무용 메모PC</title>
     <link rel="stylesheet" href="CSS/index.css">
     
 </head>
@@ -72,6 +72,25 @@
                         <span>last-date : 2022-06-11 09:12:32</span>
                 </div>
             </div> -->
+            <div class="infoBoxContainer" id="trashBinInfoBox">
+                <div class="infoBox" id="infoBox">
+                    <div class="info" id="trashBinBtn">
+                        휴지통으로 이동하기
+                    </div>
+                    <div class="info" id="copyFileBtn">
+                        파일 복사하기
+                    </div>
+                    <div class="info" id="">
+                        파일 붙여넣기
+                    </div>
+                    <div class="info" id="">
+                        크기 조절하기
+                    </div>
+                    <div class="info" id="showInfoBtn">
+                        속 성
+                    </div>
+                </div>
+            </div>
         </article>
         <article class="footer">
             <div class="docIcon" id="trashBinIcon">
@@ -80,7 +99,7 @@
                 </div>
             </div>
             <div class="docIcon">
-                <div class="imageBox">
+                <div class="imageBox" id="notepadIcon">
                     <img src="../Image/notebook.png">
                 </div>
             </div>
@@ -168,14 +187,13 @@
 
         // MODAL AND FAQ
         $('#faqBtn').click(function(){
-            $('#faq-modal').css({
-                'display' : 'block'
-            });
+            // $('#faq-modal').css({
+            //     'display' : 'block'
+            // });
+            $('#faq-modal').fadeToggle();
         })
         $('#faqCloseBtn').click(function(){
-            $('#faq-modal').css({
-                'display' : 'none'
-            });
+            $('#faq-modal').fadeToggle();
         })
         $('.accordion-item .title').click(function(){
             // $(this).next().stop().slideToggle(300);
@@ -186,14 +204,36 @@
             $(this).stop().slideUp(300);
         })
 
+        
         // DOC 프로그램 실행
+        //1. 휴지통
+        var trashBin = new TrashBin({
+            selectorId : getOnlyId(),
+            title : '휴지통',
+            trashBinList : superTrashBin
+        });
+        console.log(trashBin.trashBinList);
+
         $("#trashBinIcon").click(function(){
-            new TrashBin({
-                selectorId : getOnlyId(),
-                title : '휴지통',
-                trashBinList : superTrashBin
-            });
+            trashBin.trashBin.stop().slideToggle();
+        });
+
+        //2. 메모장
+        var notepad = new Program({
+            selectorId : getOnlyId(),
+            title : '메모장',
+            content : '',
+            size : 0,
+            date : getNow(),
+            selfFlag : 0
+        });
+
+        $("#notepadIcon").click(function(){
+            
+            notepad.program.stop().slideToggle();
         })
+
+
 
         // 슈퍼 전체 완전 객체를 한개를 만들어서 관리하자
         // TrashBin을 위한 슈퍼 완전 객체를 만들어서 항상 refresh되도록 하자

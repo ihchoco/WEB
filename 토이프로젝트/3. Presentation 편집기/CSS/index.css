@@ -238,7 +238,10 @@ img{
 .container .trashbin{
     border: 1px solid rgb(115, 106, 106);
     z-index: 100;
+    display: none;
+    margin-top: 10px;
 }
+
 .container .trashbin .top{
     background-color: rgb(83, 117, 212);
 }

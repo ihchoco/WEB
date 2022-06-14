@@ -1,6 +1,5 @@
 var superTrashBin = new Array(); //휴지통 배열
 // DOC 프로그램 실행
-var trashBin;
 
 
 function Box(options){
@@ -21,6 +20,7 @@ function Box(options){
     this.size = null;
     this.content = null;
     this.date = null;
+    this.selfFlag = null;
 
     //BOX 기능을 위한 초기값 셋팅
     this.moveToTrashBinBtn = null;
@@ -50,6 +50,8 @@ Box.prototype.optionSet = function(options){
     this.size = options.size;
     this.content = options.content;
     this.date = options.date;
+    this.selfFlag = options.selfFlag;
+
     //showInfo 붙이기
     this.menuItems = [
         {
@@ -155,16 +157,14 @@ Box.prototype.toggleInfoBox = function(){
 }
 
 Box.prototype.moveToTrashBin = function(){
-    let trashBinFlag = confirm("휴지통으로 파일 이동");
-    if(trashBinFlag){
-        // this.box.css({
-        //     'display' : 'none'
-        // })
-        
+    // let trashBinFlag = confirm("휴지통으로 파일 이동");
+    // if(trashBinFlag){
+
         superTrashBin.push(this);
+        console.log(superTrashBin);
         trashBin.refresh();
         this.box.remove();
-    }
+    // }
 }
 
 Box.prototype.runProgram = function(){
@@ -177,62 +177,10 @@ Box.prototype.runProgram = function(){
         content : this.content,
         originObj : this,
         size : this.size,
-        date : this.date
+        date : this.date,
+        selfFlag : 1
     });
 }
-
-//InfoBox
-// function InfoBox(options){
-//     this.target = null;
-//     this.infoBox = null;
-//     this.menuItems = null;
-
-//     this.init(options);
-// }
-
-// InfoBox.prototype.init = function(optinos){
-//     // this.target = options.target;
-//     this.target = '#box';
-//     // this.menuItems = options.menuItems;
-//     this.menuItems = [
-//         {
-//             'id' : 'trashBinBtn',
-//             'txt' : '휴지통으로 이동하기'
-//         },
-//         {
-//             'id' : 'copyFileBtn',
-//             'txt' : '파일 복사하기'
-//         },
-//         {
-//             'id' : 'pasteFileBtn',
-//             'txt' : '파일 붙여넣기'
-//         },
-//         {
-//             'id' : 'resize',
-//             'txt' : '크기 조절하기'
-//         },
-//         {
-//             'id' : 'showInfoBtn',
-//             'txt' : '속 성'
-//         }
-//     ];
-//     this.makeInfoBox();
-// }
-
-// InfoBox.prototype.makeInfoBox = function(){
-//     console.log("makeInfoBox 호출");
-//     let infoBoxContainer = $('<div class="infoBoxContainer"></div>');
-//     let infoBox = $(`<div id='infoBox' class='infoBox'></div>`);
-//     for(var i = 0; i < this.menuItems.length; i++){
-//         infoBox.append(`<div class='info' id='${this.menuItems[i].id}'>${this.menuItems[i].txt}</div>`);
-//     }
-//     infoBoxContainer.append(infoBox);
-
-//     $(this.target).append(infoBoxContainer);
-// }
-
-// InfoBox.prototype = Object.create(InfoBox.prototype);
-// InfoBox.prototype.constructor = InfoBox;
 
 //TrashBin
 function ProgramBox(options){
@@ -285,6 +233,7 @@ Palette.prototype.clickPalette = function(){
 
 // program(실행화면 만들기)
 function Program(options){
+    console.log("program 생성자 호출");
     this.program = null; //실행할 프로그램 화면
     this.width = null;
     this.height = null;
@@ -298,6 +247,7 @@ function Program(options){
     this.selectorId = null;
     this.date = null;
     this.originObj = null; //핵심 객체(부모)
+    this.selfFlag = 1; //0. 그냥 프로그램 실행 , 1. 텍스트 파일로 오픈한 경우
 
     //content에 들어갈 내용
     this.title = null; //아이콘 이름
@@ -332,6 +282,7 @@ Program.prototype.optionSet = function(options){
     this.content = options.content;
     this.type = options.type;
     this.size = options.size;
+    this.selfFlag = options.selfFlag;
 
     console.log("====프로그램=====");
     console.log(this.originalObjectId);
@@ -362,7 +313,8 @@ Program.prototype.makeProgram = function(){
     console.log(content);
     console.log(bottom);
     console.log(bottomSpan);
-
+    console.log("palete");
+    console.log($('.palette'));
     //Palette에 만든 DOM 붙이기
     $('.palette').append(program);
 
@@ -396,17 +348,41 @@ Program.prototype.closeProgram = function(){
     console.log("closeProgram");
     // 제거하기전 정보를 다시 BOX객체에 던져주기
     console.log(this.originObj);
+
     let content = this.program.find('.content').text();
     let date = new Date().toLocaleString();
     
+    if(this.selfFlag){
+        //닫기 전 (수정된) 정보 전달하기 - 원래 파일한테 전달(주소 참조로 데이터 전달)
+        this.originObj.content = content;
+        this.originObj.date = date;
+    
+        console.log(this.orginOBj);
+        this.program.remove(); //DOM에서 제거하기
+    }else{
+        //새로운 파일 바탕화면에 생성해주고 삭제
+        if(content.length != 0){
+            let inputTitle = prompt("제목을 입력해주세요");
+            new Box({
+                selectorId : getOnlyId(),
+                title : inputTitle,
+                type : "txt",
+                date : date,
+                size : '2',
+                content : content,
+                selfFlag : 1
+            })
+            this.content = '';
+            this.selectorId = getOnlyId()+1;
+            this.title = '';
+            this.program.css({
+                display : 'none'
+            });
+        }
 
-    //닫기 전 (수정된) 정보 전달하기
-    this.originObj.content = content;
-    this.originObj.date = date;
+    }
 
-    console.log(this.orginOBj);
-
-    this.program.remove(); //DOM에서 제거하기
+    
 }
 
 
@@ -530,7 +506,8 @@ TrashBin.prototype.initEvent = function(options){
     
     //draggable 할수있게 해주자
     this.trashBin.draggable({
-        handle : '.top'
+        handle : '.top',
+        containment : '.palette'
     });
     this.closeBtn.on('click', function(){
         _this.closeProgram();
@@ -545,6 +522,93 @@ TrashBin.prototype.closeProgram = function(options){
 
 TrashBin.prototype.refresh = function(){
     console.log("refresh 호츌");
+    //리셋 해주는 용도
+    this.trashBin.find('.content').empty();
+
+    console.log(superTrashBin);
+    for(var i = 0; i < superTrashBin.length; i++){
+        console.log("count : "+i);
+        // 여기에 삭제된 항목을 박스로 만들어서 content에 붙여주자.
+       let box = $(`<div id='${superTrashBin[i].selectorId}' class='box'></div>`);
+       let iconImage = $(`<div class='iconImage'><img src='../Image/file.png' alt='파일 아이콘'></div>`);
+       let titleText = $(`<span class="boxTitle">${superTrashBin[i].title}.${superTrashBin[i].type}</span>`);
+       box.append(iconImage);
+       box.append(titleText);
+       console.log("=========");
+       console.log(superTrashBin[i]);
+       console.log("=========");
+       
+       
+        // let infoBoxContainer = $('<div class="infoBoxContainer"></div>');
+        // let infoBox = $(`<div id='info_${superTrashBin[i].selectorId}' class='infoBox'></div>`);
+        // console.log("superTrashBIN");
+        // console.log(superTrashBin[i].menuItems[0].id);
+        // for(var j = 0; i < superTrashBin[i].menuItems.length; j++){
+        //     console.log(superTrashBin[i].menuItems[j].id);
+        //     infoBox.append(`<div class='info' id='${superTrashBin[i].menuItems[j].id}'>${superTrashBin[i].menuItems[j].txt}</div>`);
+        // }
+        // infoBoxContainer.append(infoBox);
+
+        // //만든 Box에 infoBox 붙이기
+        // box.append(infoBoxContainer);
+
+        this.trashBin.find('.content').append(box);
+    }
 
 }
    
+
+
+
+//InfoBox
+// function InfoBox(options){
+//     this.target = null;
+//     this.infoBox = null;
+//     this.menuItems = null;
+
+//     this.init(options);
+// }
+
+// InfoBox.prototype.init = function(optinos){
+//     // this.target = options.target;
+//     this.target = '#box';
+//     // this.menuItems = options.menuItems;
+//     this.menuItems = [
+//         {
+//             'id' : 'trashBinBtn',
+//             'txt' : '휴지통으로 이동하기'
+//         },
+//         {
+//             'id' : 'copyFileBtn',
+//             'txt' : '파일 복사하기'
+//         },
+//         {
+//             'id' : 'pasteFileBtn',
+//             'txt' : '파일 붙여넣기'
+//         },
+//         {
+//             'id' : 'resize',
+//             'txt' : '크기 조절하기'
+//         },
+//         {
+//             'id' : 'showInfoBtn',
+//             'txt' : '속 성'
+//         }
+//     ];
+//     this.makeInfoBox();
+// }
+
+// InfoBox.prototype.makeInfoBox = function(){
+//     console.log("makeInfoBox 호출");
+//     let infoBoxContainer = $('<div class="infoBoxContainer"></div>');
+//     let infoBox = $(`<div id='infoBox' class='infoBox'></div>`);
+//     for(var i = 0; i < this.menuItems.length; i++){
+//         infoBox.append(`<div class='info' id='${this.menuItems[i].id}'>${this.menuItems[i].txt}</div>`);
+//     }
+//     infoBoxContainer.append(infoBox);
+
+//     $(this.target).append(infoBoxContainer);
+// }
+
+// InfoBox.prototype = Object.create(InfoBox.prototype);
+// InfoBox.prototype.constructor = InfoBox;
