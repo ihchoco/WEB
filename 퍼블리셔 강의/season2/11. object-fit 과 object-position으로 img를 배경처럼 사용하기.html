@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .frame{
+            border : 5px solid #000;
+            width: 400px;
+            height: 400px;
+            background-image: url('../Image/background.png') no-repeat center center;
+            /* 위와 같이 CSS로 background-image를 사용할 경우 width , height에 따라 자동으로 비율이 변경되지 않는다. 그래서 다른방법 사용*/
+            margin-bottom: 20px;
+        }
+        /* frame2가 object-fit */
+        /* object-fit 조건
+            1. 부모에 width , height 가 있어야한다.
+            2. img에 width, height 가 있어야한다.
+        */
+        .frame2{
+            border : 5px solid red;
+            width: 400px;
+            height : 400px
+        }
+        .frame2 img{
+            width: inherit;
+            height: inherit;
+            object-fit: cover;
+            /* 일반적으로는 (배경)은 위에 경우로 충분하지만 만약 위치를 바꿔주고 싶으면 */
+            object-position: left;
+        }
+        .frame3{
+            border : 5px solid red;
+            width: 600px;
+            height: 800px;
+        }
+        .frame3 img{
+            width: inherit;
+            height: inherit;
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="frame">
+
+    </div>
+    <div class="frame2">
+        <img src="../Image/background.png" alt="">
+    </div>    
+
+    <div class="frame3">
+        <img src="../Image/background.png" alt="">
+    </div>
+</body>
+</html>

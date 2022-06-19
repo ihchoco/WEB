@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://use.fontawesome.com/2c3d88347a.js"></script>
+    <style>
+        ul + p{
+            color : red;
+        }
+        ul ~ p{
+            color : blue;
+        }
+        ul ~ div p + div{
+            color : green;
+        }
+        input[id=trigger]{
+            display : none;
+        }
+        label[for=trigger]{
+            position: absolute;
+            top : 10px;
+            left : 10px;
+            width: 30px;
+            height: 20px;
+            display: block;
+            position: relative;
+            transition: 0.3s;
+        }
+        label[for=trigger] span{
+            display : block;
+            height: 2px;
+            background-color: #000;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            transition: 0.5s;
+            z-index: 1000;;
+        }
+        label[for=trigger] span:nth-child(1){
+            top : 0;
+        }
+        label[for=trigger] span:nth-child(2){
+            top : 50%;
+        }
+        label[for=trigger] span:nth-child(3){
+            top : 100%;
+        }
+        input[id=trigger]:checked + label span:nth-child(1){
+            top: 50%;
+            transform: rotate(45deg);
+        }
+        input[id=trigger]:checked + label span:nth-child(2){
+            opacity: 0;
+        }
+        input[id=trigger]:checked + label span:nth-child(3){
+            top: 50%;
+            transform: rotate(-45deg);
+        }
+        .sidebar{
+            width: 250px;
+            height: 100vh;
+            background-color: pink;
+            position: fixed;
+            left : -250px;
+            transition: 0.3s;
+        }
+        input[id=trigger]:checked ~ .sidebar{
+            left : 0;
+        }
+        input[id=trigger]:checked + label{
+            left: 210px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- 중요함 -->
+    <!-- 
+        인접 선택자 / 형제 선택자
+        인접 : ul + p { color : red }
+        형제 : ul ~ p { color : blue }
+
+        <ul>
+            <li>목록1</li>
+            <li>목록2</li>
+            <li>목록3</li>
+        </ul>
+        <p>문단입니다.</p> => 여기가 ul + p(인접선택자). ul에 바로 인접한 p 딱 1나만.
+        <p>문단입니다.</p>
+        <div>
+            <p>div안에 자식 p입니다.</p>
+        </div>
+        <p>문단입니다.</p>
+
+        <ul>
+            <li>목록1</li>
+            <li>목록2</li>
+            <li>목록3</li>
+        </ul>
+        <p>문단입니다.</p> => 형제
+        <p>문단입니다.</p> => 형제
+        <div>
+            <p>div안에 자식 p입니다.</p>
+        </div>
+        <p>문단입니다.</p> => 형제
+     -->
+        <ul>
+            <li>목록1</li>
+            <li>목록2</li>
+            <li>목록3</li>
+        </ul>
+        <p>문단입니다.</p>
+        <p>문단입니다.</p>
+        <div>
+            <p>div안에 자식 p입니다.</p>
+        </div>
+        <p>문단입니다.</p>
+
+        <br>
+
+        <div class="container">
+            <input type="checkbox" id="trigger">
+            <label for="trigger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <div class="sidebar">
+
+            </div>
+        </div>
+        
+</body>
+</html>

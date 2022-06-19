@@ -155,8 +155,12 @@ img{
 }
 .container .palette .box:hover {
     cursor: pointer;
+    opacity: 0.7;
+}
+.container .palette .box:hover .infoBoxContainer{
     opacity: 1;
 }
+
 .container .palette .box.click{
     /* background-color: dodgerblue; */
     opacity: 0.5;
@@ -193,7 +197,8 @@ img{
     color: white;
 }
 
-.container .program{
+
+.container .notepad{
     display: block;
     border : 1px solid white;
     z-index: 1;
@@ -205,7 +210,11 @@ img{
     overflow : hidden;
     border-radius: 10px;
 }
-.container .program .top{
+.container .viewer{
+    display: block;
+}
+
+.container .notepad .top{
     border-bottom: 1px solid white;
     padding: 10px 20px;
     display : flex;
@@ -213,21 +222,21 @@ img{
     background-color: cornflowerblue;
     color: white;
 }
-.container .program .top span{
+.container .notepad .top span{
     display: inline-block;
     font-size : 14px;
 }
-.continaer .program #closeBtn{
+.continaer .notepad #closeBtn{
     cursor: pointer;
     font-weight : bold;
 }
-.container .program .content{
+.container .notepad .content{
     padding: 20px;
     border-bottom: 1px solid white;
     height: 400px;
     background-color: rgba(141, 137, 137, 0.712);
 }
-.container .program .bottom{
+.container .notepad .bottom{
     padding: 5px;
     font-size : 14px;
     text-align: end;
@@ -238,8 +247,9 @@ img{
 .container .trashbin{
     border: 1px solid rgb(115, 106, 106);
     z-index: 100;
-    display: none;
+    display: block;
     margin-top: 10px;
+    
 }
 
 .container .trashbin .top{
@@ -247,10 +257,88 @@ img{
 }
 .container .trashbin .content{
     background-color: rgb(34, 34, 34);
+    width: inherit;
 }
 .container .trashbin .bottom{
     background-color: #1c76c1;
 }
+
+/* 프로그램(계산기) */
+.container .calculator{
+    display: block;
+    border : 1px solid rgb(77, 76, 76);
+    box-shadow: 1px 1px 3px rgb(77, 76, 76);
+    box-shadow: inset;
+    z-index: 1;
+    top: 10;
+    left: 30%;
+    width: 300px;
+    position: absolute;
+    color: white;
+    background-color: rgb(43, 43, 43);
+    overflow : hidden;
+    border-radius: 10px;
+    opacity: 1;
+}
+.container .calculator.focus{
+    opacity: 1;
+}
+.container .calculator.focus .top:after{
+    content : '키패드 입력모드 ON';
+    font-size : 12px;
+}
+.container .calculator .top{
+    padding: 10px;
+}
+.container .calculator .top span{
+    display : inline-block;
+    width : 15px;
+    height: 15px;
+    background-color: gray;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.container .calculator .top span:nth-child(1){
+    background-color: rgb(205, 75, 75);
+}
+.container .calculator .top span:nth-child(2){
+    background-color: yellow;
+}
+.container .calculator .top span:nth-child(3){
+    background-color: rgb(87, 238, 76);
+}
+
+.container .calculator .content{
+    font-size : 45px;
+    text-align : right;
+    width: inherit;
+    overflow : hidden;
+}
+.container .calculator .bottom{
+}
+.container .calculator .bottom .row{
+    display : flex;
+}
+.container .calculator .bottom .row span{
+    display : block;
+    flex : 1;
+    border : 1px solid rgb(99, 99, 99);
+    text-align: center;
+    background-color: rgb(65, 63, 63);
+    padding: 15px 0px;
+    font-size : 21px;
+    box-sizing: border-box;
+}
+.container .calculator .bottom .row:first-child span{
+    background-color: rgb(54, 52, 52);
+}
+.container .calculator .bottom .row span:last-child{
+    background-color: orange;
+}
+.container .calculator .bottom .row:last-child span:first-child{
+    flex: 2;
+}
+
 
 .container .footer{
     height: 100px;

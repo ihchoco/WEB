@@ -91,7 +91,7 @@ Box.prototype.init = function(options){
 Box.prototype.makeBox = function(){
     // option으로 받은 정보를 이용해서 icon을 만들어서 붙여주는곳
     // //console.log("makeBox 호출");
-
+    
     let box = $(`<div id='${this.selectorId}' class='box'></div>`);
     let iconImage = $(`<div class='iconImage'><img src='../Image/file.png' alt='파일 아이콘'></div>`);
     let titleText = $(`<span class="boxTitle">${this.title}.${this.type}</span>`);
@@ -125,7 +125,7 @@ Box.prototype.initEvent = function(){
     })
     
     // box drag 이벤트 연결
-    this.box.draggable();
+    // this.box.draggable();
     
     //console.log(this.moveToTrashBinBtn);
     // 휴지통 이동버튼 기능 연결
@@ -145,7 +145,7 @@ Box.prototype.initEvent = function(){
 
 // 객체 기능연결 모음
 Box.prototype.clickBox = function(){
-    //////console.log("clickBox 호출");
+    console.log("clickBox 호출");
     this.box.toggleClass('click');
     
 }
@@ -183,26 +183,6 @@ Box.prototype.runProgram = function(){
     });
 }
 
-//TrashBin
-function ProgramBox(options){
-    // BOX 기본정보 초기값 셋팅
-    this.box = null;
-    this.width = null;
-    this.height = null;
-    this.text = null;
-    this.x = null;
-    this.y = null;
-    this.backgroundColor = null;
-    this.color = null;
-    this.borderColor = null;
-    this.originObj = null;
-    this.date = null;
-
-}
-
-ProgramBox.prototype = Object.create(Box.prototype);
-ProgramBox.prototype.constructor = ProgramBox;
-
 //Palette 전체 배경화면
 function Palette(options){
     this.palette = null;
@@ -230,6 +210,7 @@ Palette.prototype.initEvent = function(){
 Palette.prototype.clickPalette = function(){
     //console.log("clickPalette 호출");
     $('.infoBox').removeClass('show');
+    // $('#calculator').removeClass('focus');
 }
 
 // program(실행화면 만들기)
@@ -293,11 +274,11 @@ Program.prototype.makeProgram = function(){
     // option으로 받은 정보를 이용해서 icon을 만들어서 붙여주는곳
     //console.log("makeBox 호출");
 
-    let program = $(`<div id='${this.selectorId}' class='program'></div>`);
+    let program = $(`<div id='${this.selectorId}' class='notepad viewer'></div>`);
     let top = $(`<div class='top'><span>${this.title}</span><span id='closeBtn'>X</span></div>`);
     let content = $(`<div class='content' contenteditable="true">${this.content}</div>`);
     let bottom = $(`<div class='bottom'></div>`);
-    let bottomSpan = $(`<span>length : ${this.size}byte / </span><span>last-date : ${this.date}</span>`);
+    let bottomSpan = $(`<span>length : <span class='length'>${this.size}</span> / </span><span>last-date : ${this.date}</span>`);
 
     //let bottom = $(`<div class='bottom><span>length : ${this.size}byte </span>
     //<span>last-date : ${this.date}</span></div>`);
@@ -323,6 +304,7 @@ Program.prototype.makeProgram = function(){
 
 Program.prototype.init = function(options){
     this.program = $(`#${options.selectorId}`);
+    this.contentBox = this.program.find(".content"); //입력할때 길이 구하기
 
     //console.log(this.box);
     // BOX 기능버튼 설정
@@ -343,7 +325,17 @@ Program.prototype.initEvent = function(options){
     this.closeBtn.on('click', function(){
         _this.closeProgram();
     })
+    this.contentBox.on('keyup', function(){
+        _this.showContentLength();
+    })
 }
+
+Program.prototype.showContentLength = function(){
+    let length = this.contentBox.text().length;
+    console.log(length);
+    this.program.find('.length').text(length);
+}
+
 
 Program.prototype.closeProgram = function(){
 
@@ -355,37 +347,35 @@ Program.prototype.closeProgram = function(){
     console.log(content);
     let date = new Date().toLocaleString();
     console.log(date);
+    let legnth = this.program.find('.length').text().length;
+    console.log(length);
     
-    if(this.selfFlag){
-        //닫기 전 (수정된) 정보 전달하기 - 원래 파일한테 전달(주소 참조로 데이터 전달)
-        this.originObj.content = content;
-        this.originObj.date = date;
-    
-        ////console.log(this.orginOBj);
-    }else{
-        //새로운 파일 바탕화면에 생성해주고 삭제
-        if(content.length != 0){
-            let inputTitle = prompt("제목을 입력해주세요", "default");
-            new Box({
-                selectorId : getOnlyId(),
-                title : inputTitle,
-                type : "txt",
-                date : date,
-                size : '2',
-                content : content,
-                selfFlag : 1
-            })
-            this.program.remove(); //DOM에서 제거하기
-        }else{
-            this.content = '';
-            this.selectorId = getOnlyId()+1;
-            this.title = '';
-            this.program.css({
-                display : 'none'
-            });
-        }
+    //원래 내용 vs 수정된 내용
+    let originContent = this.originObj.content;
+    let updateContent = content;
 
-    }
+    //닫기 전 (수정된) 정보 전달하기 - 원래 파일한테 전달(주소 참조로 데이터 전달)
+    this.originObj.content = content;
+    this.originObj.date = date;
+    this.originObj.size = length;
+    ////console.log(this.orginOBj);
+    //새로운 파일 바탕화면에 생성해주고 삭제
+    this.program.remove(); //DOM에서 제거하기
+    
+    // if(originContent != updateContent){
+        // ==다른이름으로 저장 기능==
+        // let inputTitle = prompt("제목을 입력해주세요", "default");
+        // new Box({
+        //     selectorId : getOnlyId(),
+        //     title : inputTitle,
+        //     type : "txt",
+        //     date : date,
+        //     size : '2',
+        //     content : content,
+        //     selfFlag : 1
+        // })
+    // }else{
+    // }
 
     
 }
@@ -394,172 +384,4 @@ Program.prototype.closeProgram = function(){
 // 휴지통 만들기
 // 이거 위에부터 다 클래스 ES6로 바꾸고 상속 개념사용해서 만들자
 
-// program(실행화면 만들기)
-function TrashBin(options){
-    this.trashBin = null; //실행할 프로그램 화면
-    this.width = null;
-    this.height = null;
-    this.text = null;
-    this.x = null;
-    this.y = null;
-    this.backgroundColor = null;
-    this.color = null;
-    this.borderColor = null;
-    this.menuItems = null;
-    this.selectorId = null;
-    this.date = null;
-    this.originObj = null; //핵심 객체(부모)
-
-    //content에 들어갈 내용
-    this.title = null; //아이콘 이름
-    this.content = null;
-    this.type = null; //icon , program
-    this.size = null;
-
-    //trashBin에 들어있는 휴지통 프로그램
-    this.trashBinList = null;
-
-    //Program 버튼 셋팅
-    this.saveBtn = null;
-    this.closeBtn = null;
-
-    this.optionSet(options);
-    this.makeProgram(); //HTML DOM 만들기
-    this.init(options);
-    
-}
-
-TrashBin.prototype.optionSet = function(options){
-    this.selectorId = options.selectorId;
-    this.width = options.width;
-    this.height = options.height;
-    this.text = options.text;
-    this.x = options.x;
-    this.y = options.y;
-    this.backgroundColor = options.backgroundColor;
-    this.color = options.color;
-    this.borderColor = options.borderColor;
-    this.date = options.date;
-    this.originObj = options.originObj; //부모 객체
-    this.trashBinList = options.trashBinList;
-
-    this.title = options.title;
-    this.content = options.content;
-    this.type = options.type;
-    this.size = options.size;
-
-    //console.log("====프로그램=====");
-    //console.log(this.originalObjectId);
-}
-
-
-TrashBin.prototype.makeProgram = function(){
-    // option으로 받은 정보를 이용해서 icon을 만들어서 붙여주는곳
-    //console.log("makeBox 호출");
-
-    let trashBin = $(`<div id='${this.selectorId}' class='program trashbin'></div>`);
-    let top = $(`<div class='top'><span>${this.title}</span><span id='closeBtn'>X</span></div>`);
-    let content = $(`<div class='content'></div>`);
-
-    for(var i = 0; i < this.trashBinList.length; i++){
-         // 여기에 삭제된 항목을 박스로 만들어서 content에 붙여주자.
-        let box = $(`<div id='${this.trashBinList[i].selectorId}' class='box'></div>`);
-        let iconImage = $(`<div class='iconImage'><img src='../Image/file.png' alt='파일 아이콘'></div>`);
-        let titleText = $(`<span class="boxTitle">${this.trashBinList[i].title}.${this.trashBinList[i].type}</span>`);
-        box.append(iconImage);
-        box.append(titleText);
-        content.append(box);
-        //console.log("=========");
-        //console.log(this.trashBinList[i]);
-        //console.log("=========");
-    }
-   
-
-
-    let bottom = $(`<div class='bottom'><span>length : ${this.size}byte / </span><span>last-date : ${this.date}</span></div>`);
-
-    //let bottom = $(`<div class='bottom><span>length : ${this.size}byte </span>
-    //<span>last-date : ${this.date}</span></div>`);
-
-    trashBin.append(top);
-    trashBin.append(content);
-    trashBin.append(bottom);
-    
-
-    //console.log(top);
-    //console.log(content);
-    //console.log(bottom);
-
-    //Palette에 만든 DOM 붙이기
-    $('.palette').append(trashBin);
-
-}
-
-TrashBin.prototype.init = function(options){
-    this.trashBin = $(`#${options.selectorId}`);
-
-    //console.log(this.trashBin);
-    // BOX 기능버튼 설정
-    // this.saveBtn = this.box.find("#saveBtn"); 
-    this.closeBtn = this.trashBin.find("#closeBtn"); //클로즈 할때 자동으로 저장?
-
-    this.initEvent();
-}
-
-TrashBin.prototype.initEvent = function(options){
-    var _this = this;
-    
-    //draggable 할수있게 해주자
-    this.trashBin.draggable({
-        handle : '.top',
-        containment : '.palette'
-    });
-    this.closeBtn.on('click', function(){
-        _this.closeProgram();
-    })
-}
-
-TrashBin.prototype.closeProgram = function(options){
-    //console.log("closeTrashBin");
-
-    this.trashBin.remove(); //DOM에서 제거하기
-}
-
-TrashBin.prototype.refresh = function(){
-    //console.log("refresh 호츌");
-    //리셋 해주는 용도
-    this.trashBin.find('.content').empty();
-
-    //console.log(superTrashBin);
-    for(var i = 0; i < superTrashBin.length; i++){
-        //console.log("count : "+i);
-        // 여기에 삭제된 항목을 박스로 만들어서 content에 붙여주자.
-       let box = $(`<div id='${superTrashBin[i].selectorId}' class='box'></div>`);
-       let iconImage = $(`<div class='iconImage'><img src='../Image/file.png' alt='파일 아이콘'></div>`);
-       let titleText = $(`<span class="boxTitle">${superTrashBin[i].title}.${superTrashBin[i].type}</span>`);
-       box.append(iconImage);
-       box.append(titleText);
-       //console.log("=========");
-       //console.log(superTrashBin[i]);
-       //console.log("=========");
-       
-       
-        // let infoBoxContainer = $('<div class="infoBoxContainer"></div>');
-        // let infoBox = $(`<div id='info_${superTrashBin[i].selectorId}' class='infoBox'></div>`);
-        // //console.log("superTrashBIN");
-        // //console.log(superTrashBin[i].menuItems[0].id);
-        // for(var j = 0; i < superTrashBin[i].menuItems.length; j++){
-        //     //console.log(superTrashBin[i].menuItems[j].id);
-        //     infoBox.append(`<div class='info' id='${superTrashBin[i].menuItems[j].id}'>${superTrashBin[i].menuItems[j].txt}</div>`);
-        // }
-        // infoBoxContainer.append(infoBox);
-
-        // //만든 Box에 infoBox 붙이기
-        // box.append(infoBoxContainer);
-
-        this.trashBin.find('.content').append(box);
-    }
-
-}
-   
 
