@@ -289,12 +289,17 @@
             selfFlag : 0
         });
         //처음에 보여지기전에 바로 접어놔야지 한번 클릭으로 바로 펼쳐짐
-        // calculator.calculator.slideToggle(0);
+        calculator.calculator.slideToggle(0);
         $("#calculatorIcon").click(function(){
             calculator.calculator.stop().slideToggle();
         })
 
 
+        //전체 객체 잡아서 focus효과주기
+        // console.log($('.container').find('div'));
+        // $('.container').find('div').on('click', function(){
+        //     $(this).addClass('focus');
+        // })
 
         // 슈퍼 전체 완전 객체를 한개를 만들어서 관리하자
         // TrashBin을 위한 슈퍼 완전 객체를 만들어서 항상 refresh되도록 하자

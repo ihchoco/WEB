@@ -69,8 +69,22 @@ class TrashBin{
             box.append(iconImage);
             box.append(titleText);
 
+            let infoBoxContainer = $('<div class="infoBoxContainer"></div>');
+            let menuItems = [
+                { key : 'rollback', value : '복 구'},
+                { key : 'delete', value : '삭 제'}
+            ];
+            let infoBox = $(`<div class='infoBox'></div>`);
+            for(var i = 0; i < menuItems.length; i++){
+                infoBox.append(`<div class='info' id='${menuItems[i].key}'>${menuItems[i].value}</div>`);
+            }
+            infoBoxContainer.append(infoBox);
+
             this.trashBin.find('.content').append(box);
         }
+    }
+    clean(){
+        console.log("clean");
     }
 
 }

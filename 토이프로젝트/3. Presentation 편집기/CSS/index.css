@@ -13,6 +13,9 @@ img{
     height: 100%;
 }
 
+.focus{
+    z-index : 1000;
+}
 .container{
     color : white;
     fotn-size : 14px;
@@ -22,6 +25,7 @@ img{
     background-size: 100% 100%;
     /* height: 833px; */
     height: 100vh;
+    overflow: hidden;
 }
 
 .container article{
@@ -48,6 +52,8 @@ img{
     color: white;
     cursor: pointer;
 }
+
+
 
 
 /* 
@@ -269,9 +275,9 @@ img{
     border : 1px solid rgb(77, 76, 76);
     box-shadow: 1px 1px 3px rgb(77, 76, 76);
     box-shadow: inset;
-    z-index: 1;
+    z-index: 100;
     top: 10;
-    left: 30%;
+    left: 60%;
     width: 300px;
     position: absolute;
     color: white;
@@ -378,3 +384,12 @@ img{
 
 
 
+@media only screen and (max-width: 1200px) {
+    /* PC CSS  */
+    .modal-content{
+        width : 800px;
+    }
+    .container .footer{
+        width: 700px;
+    }
+}

@@ -55,7 +55,7 @@ class Calculator{
             if(_this.focusFlag){
                 let code = e.keyCode;
 
-                if((code>47 && code < 58) || e.ctrlKey || e.altKey || code == 8 || code == 9 || code ==46 || e.key == '+' || e.key == '-' || e.key == '*' || e.key == '/' || e.key == 'Enter' || e.key == 'Escape'){
+                if((code>47 && code < 58) || e.ctrlKey || e.altKey || code == 8 || code == 9 || code ==46 || e.key == '+' || e.key == '-' || e.key == '*' || e.key == '/' || e.key == 'Enter' || e.key == 'Escape' || e.key == '.'){
                     _this.clickButton(e.key);     
                     return;
                 }
@@ -70,7 +70,7 @@ class Calculator{
     clickButton(param){
         let input = param;
 
-        if(isNaN(input)){
+        if(isNaN(input) && input != '.'){
             this.inputNotNumber(input);
         }else{
             //숫자가 들어올때
