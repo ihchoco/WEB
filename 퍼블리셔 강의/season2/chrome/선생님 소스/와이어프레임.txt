@@ -1,0 +1,86 @@
+.container
+	
+	header
+		.logo > img
+		.download > a.btn-download
+	
+	section.welcome
+		.heading
+			img
+			h1
+			p
+			.download-content
+				a.btn-download
+				span
+			.statics
+				p
+					label > input[type=checkbox], a
+				p > a*2
+			.next-section
+			  a > i
+	
+	section.feature.solution
+		.inner
+			.desc
+				img
+				h1
+				p
+				a.read-more
+			.photo
+				img
+	
+	section.feature.smart
+		.inner
+			.photo
+				img
+			.desc
+				img
+				h1
+				p
+				a.read-more
+	
+	section.feature.secure
+		.inner
+			.desc
+				img
+				h1
+				p
+				a.read-more
+			.photo
+				img
+				
+	section.feature.edit
+		.inner
+			.photo
+				img
+			.desc
+				img
+				h1
+				p
+				a.read-more
+	
+	section.callaction
+		.inner
+			h1
+			a.btn-download
+	
+	footer
+		.footer-inner
+			.sns-outer
+				.sns
+					b, span > (a > i)*3
+			.sitemap
+				div
+					b
+					a*4
+			.copyright
+				.logo-footer
+					img
+				.policy
+					a*3
+				.language
+					i, select
+					
+					
+					
+				

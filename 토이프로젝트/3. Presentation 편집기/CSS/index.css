@@ -358,6 +358,7 @@ img{
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    
 }
 .container .footer .docIcon{
     width : 100px;

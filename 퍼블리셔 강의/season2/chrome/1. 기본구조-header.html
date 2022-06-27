@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>크롬 브라우저 다운로드</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="image/google-dev.png">
+    <style>
+        *{
+            box-sizing: border-box;
+            outline: none;
+        }
+        body{
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            font-size: 16px;
+            color: #3c4043;
+            line-height: 1.6em;
+        }
+        a{
+            text-decoration: none;
+            color: #3c4043;
+        }
+
+        /* Common CSS */
+        /* 공통으로 쓰이는것 */
+        .btn-download{
+            background-color: dodgerblue;
+            color: #fff;
+            display: inline-block;
+            width: 180px;
+            padding: 10px;
+            text-align: center;
+            border-radius: 2px;
+        }
+        .btn-download:hover{
+            background-color: #174EA6;
+        }
+
+        /* Header */
+        header{
+            height: 65px;
+            background-color: #fff;
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 0 20px;
+        }
+        .logo{
+            float : left;
+            padding-top: 20px;
+        }
+        .download{
+            float : right;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="index.html" title="chrome 다운로드"><img src="image/google-chrome-logo.jpeg"></a>
+            </div>
+            <div class="download">
+                <a href="" class="btn-download">
+                    chrome 다운로드
+                </a>
+            </div>
+        </header>
+        <section class="welcome"></section>
+        <section class="feature solution"></section>
+        <section class="feature smart"></section>
+        <section class="feature secure"></section>
+        <section class="feature edit"></section>
+        <section class="callaction"></section>
+        <footer></footer>
+    </div>
+</body> 
+</html>
