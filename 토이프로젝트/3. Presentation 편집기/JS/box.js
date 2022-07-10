@@ -160,7 +160,7 @@ Box.prototype.toggleInfoBox = function(){
 Box.prototype.moveToTrashBin = function(){
     // let trashBinFlag = confirm("휴지통으로 파일 이동");
     // if(trashBinFlag){
-
+        console.log("moveToTrashBin 호출-box");
         superTrashBin.push(this);
         //console.log(superTrashBin);
         trashBin.refresh();

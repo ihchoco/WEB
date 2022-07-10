@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>업무용 메모PC</title>
+    <link rel="shortcut icon" href="../Image/pavicon.png" type="image/x-icon">
     <link rel="stylesheet" href="CSS/index.css">
     
 </head>
@@ -12,8 +13,13 @@
 
     <div class="container">
         <article class="hero">
-            <span>로고</span>
-            <span>토, 6월 11 8:42 오후</span>
+            <span>☂︎</span>
+            <span>
+                <span id="day">토</span>, 
+                <span id="month-date">6월 11</span> 
+                <span id="time">8:42</span>
+                <span id="am-pm">오후</span>
+            </span>
             <span>배터리</span>
             <span>검색</span>
             <span class="faq-btn" id="faqBtn">FAQ</span>
@@ -76,9 +82,9 @@
             <!-- 프로그램(계산기) -->
             <div class="calculator" id="calculator">
                 <div class="top">
+                    <span id="exitBtn"></span>
                     <span id="closeBtn"></span>
-                    <span></span>
-                    <span></span>
+                    <span id="resizeBtn"></span>
                 </div>
                 <div class="content">
                     0
@@ -198,6 +204,7 @@
     <script src="https://use.fontawesome.com/2c3d88347a.js"></script>
     <!-- script import -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="JS/app.js"></script>
     <script src="JS/box.js"></script>
     <script src="JS/memProgram.js"></script>
     <script src="JS/trashBin.js"></script>
@@ -206,25 +213,51 @@
         $(document).ready(function(){
             //전역객체 생성[모든 객체의 정보를 담고있음]
             var allObjList = [];
-
             // 배경객체 생성
             new Palette({
                 selectorId : 'palette'
             })
 
-            // new InfoBox({});
-            for(var i = 0; i < 2; i++){
-                let temp = new Box({
-                    allObjList : allObjList,
-                    selectorId : getOnlyId(),
-                    title : "Helloworld"+i,
-                    type : "txt",
-                    content : `hello world`,
-                    size : '10',
-                    date : getNow()
+            
+            /***************************
+             *  초기 값 셋팅
+             *  1. 시간 불러오기
+             *  2. 저장된 파일 불러오기
+             ***************************/
+            
+            //1. 현재시간 가져오기
+            app.getCurentTimeNow();
+            setInterval(app.getCurentTimeNow, 1000*60);
+
+
+            //2. 저장된 파일 불러오기(LocalStorage)
+            let readFiles = app.getAllFile();
+            let i = 0;
+            readFiles.forEach(file => {
+                new Box({
+                    selectorId : file.selectorId,
+                    title : file.title,
+                    type : file.type,
+                    content : file.content,
+                    size : file.size,
+                    date : file.date
                 });
-                allObjList.push(temp);
-            }
+                i++;
+            });
+            // for(var i = 0; i < 1; i++){
+            //     let temp = new Box({
+            //         allObjList : allObjList,
+            //         selectorId : getOnlyId()+i,
+            //         title : "Helloworld"+i,
+            //         type : "txt",
+            //         content : `hello world`,
+            //         size : '10',
+            //         date : getNow()
+            //     });
+            //     allObjList.push(temp);
+            // }
+            
+            
             console.log(allObjList);
 
         });

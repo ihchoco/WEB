@@ -55,7 +55,7 @@ class TrashBin{
         this.trashBin.find('.length').text(length);
     }
     refresh(){
-        //console.log("refresh 호츌");
+        console.log("refresh 호츌");
         //리셋 해주는 용도
         this.trashBin.find('.content').empty();
         
@@ -69,16 +69,16 @@ class TrashBin{
             box.append(iconImage);
             box.append(titleText);
 
-            let infoBoxContainer = $('<div class="infoBoxContainer"></div>');
-            let menuItems = [
-                { key : 'rollback', value : '복 구'},
-                { key : 'delete', value : '삭 제'}
-            ];
-            let infoBox = $(`<div class='infoBox'></div>`);
-            for(var i = 0; i < menuItems.length; i++){
-                infoBox.append(`<div class='info' id='${menuItems[i].key}'>${menuItems[i].value}</div>`);
-            }
-            infoBoxContainer.append(infoBox);
+            // let infoBoxContainer = $('<div class="infoBoxContainer"></div>');
+            // let menuItems = [
+            //     { key : 'rollback', value : '복 구'},
+            //     { key : 'delete', value : '삭 제'}
+            // ];
+            // let infoBox = $(`<div class='infoBox'></div>`);
+            // for(var i = 0; i < menuItems.length; i++){
+            //     infoBox.append(`<div class='info' id='${menuItems[i].key}'>${menuItems[i].value}</div>`);
+            // }
+            // infoBoxContainer.append(infoBox);
 
             this.trashBin.find('.content').append(box);
         }

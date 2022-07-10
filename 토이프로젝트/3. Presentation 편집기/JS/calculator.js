@@ -26,10 +26,13 @@ class Calculator{
         
         this.focusFlag = false;
         
+        //사이즈 조절 
+        this.sizeFlag = false;
 
         this.init();
     }
     init(){
+        this.exitBtn = this.calculator.find("#exitBtn");
         this.closeBtn = this.calculator.find("#closeBtn");
         this.initEvent();
     }
@@ -39,6 +42,9 @@ class Calculator{
         this.calculator.draggable({
             handle : '.top'
         });
+        this.exitBtn.on('click', function(){
+            _this.exitProgram();
+        })
         this.closeBtn.on('click', function(){
             _this.closeProgram();
         })
@@ -49,6 +55,13 @@ class Calculator{
             _this.calculator.toggleClass('focus');
             _this.focusFlag = !_this.focusFlag;
             console.log(_this.focusFlag);
+        })
+        this.calculator.find("#resizeBtn").on('click', function(){
+            if(_this.sizeFlag){
+                _this.smallSize();
+            }else{
+                _this.fullSize();
+            }
         })
         window.addEventListener('keydown', function(e){
             console.log(e.key);
@@ -69,6 +82,7 @@ class Calculator{
     }
     clickButton(param){
         let input = param;
+        
 
         if(isNaN(input) && input != '.'){
             this.inputNotNumber(input);
@@ -77,6 +91,7 @@ class Calculator{
             if(this.inputNumberFlag == 'left'){
                 this.leftNum += input;
             }else{
+                if(this.operator == "") return;
                 this.rightNum += input;
             }
         }
@@ -147,6 +162,51 @@ class Calculator{
         this.leftNum = answer;
         this.rightNum = '';
         this.content.text(answer);
+    }
+
+    fullSize(){
+        console.log("fullsize 호출");
+        this.calculator.animate({
+            "width" : "45%",
+            "left"  : this.calculator.offset().left - 100
+        })
+        this.sizeFlag = true;
+    }
+
+    smallSize(){
+        console.log("smallsize 호출");
+        this.calculator.animate({
+            "width" : "25%",
+            "left"  : this.calculator.offset().left + 100
+        })
+        this.sizeFlag = false;
+    }
+
+    exitProgram(){
+        console.log("exitProgram 호출");
+        this.leftNum = '';
+        this.rightNum = '';
+        this.inputNumberFlag = 'left';
+        this.tempNum = '';
+        this.showNum = '';
+        this.operator = '';
+        this.operatorFlag = false;
+        
+        this.focusFlag = false;
+        this.calculator.removeClass('focus');
+
+        //사이즈 조절 
+        this.sizeFlag = false;
+
+        this.content.text(0);
+
+
+        this.calculator.css({
+            "display" : "none",
+            "top" : "10",
+            "left" : "60%",
+            "width" : "25%"
+        });
     }
     
 }

@@ -1,3 +1,9 @@
+/* Google Web Fonts CDN */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+/* XEICON CDN  */
+@import url('http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css');
+
 *{
     padding: 0;
     margin: 0;
@@ -165,6 +171,7 @@ img{
 }
 .container .palette .box:hover .infoBoxContainer{
     opacity: 1;
+    
 }
 
 .container .palette .box.click{
@@ -172,7 +179,8 @@ img{
     opacity: 0.5;
 }
 .container .palette .infoBoxContainer{
-    position: absolute;
+    position: relative;
+    /* position : absolute; */
     top : 0;
     right : 0;
     display : block;
@@ -278,7 +286,7 @@ img{
     z-index: 100;
     top: 10;
     left: 60%;
-    width: 300px;
+    width: 25%;
     position: absolute;
     color: white;
     background-color: rgb(43, 43, 43);
@@ -306,18 +314,24 @@ img{
 }
 .container .calculator .top span:nth-child(1){
     background-color: rgb(205, 75, 75);
+    content: "x";
+    color: white;
 }
 .container .calculator .top span:nth-child(2){
     background-color: yellow;
+    content: "_";
+    color: white;
 }
 .container .calculator .top span:nth-child(3){
     background-color: rgb(87, 238, 76);
+    content: "⎅";
+    color: white;
 }
 
 .container .calculator .content{
     font-size : 45px;
     text-align : right;
-    width: inherit;
+    width: 100%;
     overflow : hidden;
 }
 .container .calculator .bottom{
@@ -383,6 +397,9 @@ img{
     
 }
 
+#chromeIcon{
+    transform: translateY(10px);
+}
 
 
 @media only screen and (max-width: 1200px) {

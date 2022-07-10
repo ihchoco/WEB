@@ -43,7 +43,7 @@ class Notepad{
         let date = new Date().toLocaleString();
         if(content.length != 0){
             let inputTitle = prompt("제목을 입력해주세요", "default");
-            new Box({
+            let newFile = new Box({
                 selectorId : getOnlyId(),
                 title : inputTitle,
                 type : "txt",
@@ -51,7 +51,10 @@ class Notepad{
                 size : '2',
                 content : content,
                 selfFlag : 1
-            })
+            });
+
+            app.putFile(newFile);
+            app.saveAllFile();
         }
 
         //내용 초기화
