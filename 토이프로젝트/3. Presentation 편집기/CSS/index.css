@@ -25,7 +25,8 @@ img{
 .container{
     color : white;
     fotn-size : 14px;
-    background-image: url('../../Image/mac_background3.png');
+    /* background-image: url('../../Image/mac_background3.png'); */
+    background-image: url('../../Image/background/8.JPG');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;
