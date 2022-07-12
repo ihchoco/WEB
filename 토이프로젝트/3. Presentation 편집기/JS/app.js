@@ -1,5 +1,28 @@
 let app = {
     fileList : new Array(), // 여기에 모든 파일을 담아서 관리한다.
+    // boxObjList : new Array(), //여기에 바탕화면에 있는 모든 배열정보를 관리한다.
+    init : function(){ //최초 수행할 함수 모두 등록
+        
+        window.oncontextmenu = function () {
+            return false;
+        };
+
+        //BackgroundInfoBox 이벤트 등록
+        $("#changeBackground").click(function(){
+            // alert("change");
+            $("#setBackgroundBox").css({
+                'display' : 'block'
+            })
+        })
+        $("#clearAllFile").click(function(){
+            // alert("clearAllFile");
+            console.log("clearAllFile");
+            console.log(window.boxObjList);
+            // console.log(this.boxObjList);
+            //this.clearLocalStorage(); //저장된 데이터 모두삭제
+        })
+        
+    },
     getAllFile : function(){
         console.log("getAllFile 호출");
         let files = window.localStorage.getItem("files");

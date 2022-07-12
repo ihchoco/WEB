@@ -25,6 +25,21 @@
             <span class="faq-btn" id="faqBtn">FAQ</span>
         </article>
         <article class="palette">
+            <!-- 바탕화면 우클릭 메뉴 -->
+            <div class="infoBox" id="backgroundMenuBox">
+                <div class="info" id="changeBackground">
+                    배경화면 바꾸기
+                </div>
+                <div class="info" id="clearAllFile">
+                    모두 지우기
+                </div>
+                <div class="info" id="copyFileBtn">
+                    새 폴더 만들기
+                </div>
+                <div class="info" id="showInfoBtn">
+                    버전 확인하기
+                </div>
+            </div>
             <!-- <div class="box" id="box">
                 <div class="iconImage">
                     <img src="../Image/file.png" alt="파일아이콘">
@@ -50,6 +65,60 @@
                     </div>
                 </div>
             </div> -->
+            <!-- 설정화면(배경화면 변경) -->
+            <div class="setBox backgroundBox" id="setBackgroundBox">
+                <div class="top">
+                    <div class="left">
+                        <span id="exitBtn"></span>
+                        <span id="closeBtn"></span>
+                        <span id="resizeBtn"></span>
+                    </div>
+                    <div class="center">
+                        데스크탑 배경화면 및 화면보호기 설정
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="left">
+                        <span>적용 배경화면</span>
+                        <div class="bgImgBox" id="realBackgroundBox">
+                            <img src="../Image/background/8.JPG"/>
+                        </div>
+                        <div>
+                            <input type="button" value="적 용"/>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="row">
+                            <div class="bgImgBox" id="realBackgroundBox">
+                                <img src="../Image/background/1.JPG"/>
+                            </div>
+                            <div class="bgImgBox" id="realBackgroundBox">
+                                <img src="../Image/background/2.JPG"/>
+                            </div>
+                            <div class="bgImgBox" id="realBackgroundBox">
+                                <img src="../Image/background/3.JPG"/>
+                            </div>
+                            <div class="bgImgBox" id="realBackgroundBox">
+                                <img src="../Image/background/4.JPG"/>
+                            </div>    
+                        </div>
+                        <div class="row">
+                            <div class="bgImgBox" id="realBackgroundBox">
+                                <img src="../Image/background/5.JPG"/>
+                            </div>
+                            <div class="bgImgBox" id="realBackgroundBox">
+                                <img src="../Image/background/6.JPG"/>
+                            </div>
+                            <div class="bgImgBox" id="realBackgroundBox">
+                                <img src="../Image/background/7.JPG"/>
+                            </div>
+                            <div class="bgImgBox" id="realBackgroundBox">
+                                <img src="../Image/background/8.JPG"/>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- 프로그램(휴지통) -->
             <div class="notepad trashbin" id="trashBin">
                 <div class="top">
@@ -209,10 +278,11 @@
     <script src="JS/memProgram.js"></script>
     <script src="JS/trashBin.js"></script>
     <script src="JS/calculator.js"></script>
+    <script src="JS/background.js"></script>
     <script>
         $(document).ready(function(){
             //전역객체 생성[모든 객체의 정보를 담고있음]
-            var allObjList = [];
+            var boxObjList = [];
             // 배경객체 생성
             new Palette({
                 selectorId : 'palette'
@@ -225,6 +295,9 @@
              *  2. 저장된 파일 불러오기
              ***************************/
             
+            //0. 초기 함수 호출(init)
+            app.init();
+
             //1. 현재시간 가져오기
             app.getCurentTimeNow();
             setInterval(app.getCurentTimeNow, 1000*60);
@@ -234,14 +307,15 @@
             let readFiles = app.getAllFile();
             let i = 0;
             readFiles.forEach(file => {
-                new Box({
+                // app.boxObjList.push(new Box({
+                boxObjList.push(new Box({
                     selectorId : file.selectorId,
                     title : file.title,
                     type : file.type,
                     content : file.content,
                     size : file.size,
                     date : file.date
-                });
+                }));
                 i++;
             });
             // for(var i = 0; i < 1; i++){
@@ -257,10 +331,21 @@
             //     allObjList.push(temp);
             // }
             
+            console.log("boxObjList");
+            console.log(boxObjList);
+        
             
-            console.log(allObjList);
+            //처음에 보여지기전에 바로 접어놔야지 한번 클릭으로 바로 펼쳐짐
+            calculator.calculator.slideToggle(0);
+            $("#calculatorIcon").click(function(){
+                calculator.calculator.stop().slideToggle();
+            })
 
+            //4. 셋팅(백그라운드)
+            var background = new BackgrondSetting();
         });
+
+        //부가적인 함수
 
         function getOnlyId(){
             return `box_${Date.now()}`;
@@ -269,26 +354,6 @@
             return new Date().toLocaleString();
         }
 
-        // MODAL AND FAQ
-        $('#faqBtn').click(function(){
-            // $('#faq-modal').css({
-            //     'display' : 'block'
-            // });
-            $('#faq-modal').fadeToggle();
-        })
-        $('#faqCloseBtn').click(function(){
-            $('#faq-modal').fadeToggle();
-        })
-        $('.accordion-item .title').click(function(){
-            // $(this).next().stop().slideToggle(300);
-            $(this).siblings('.content').stop().slideToggle(300);
-            $(this).toggleClass('active');
-        })
-        $('.accordion-item .content').click(function(){
-            $(this).stop().slideUp(300);
-        })
-
-        
         // DOC 프로그램 실행
         //1. 휴지통
         var trashBin = new TrashBin({
@@ -326,38 +391,26 @@
             date : getNow(),
             selfFlag : 0
         });
-        //처음에 보여지기전에 바로 접어놔야지 한번 클릭으로 바로 펼쳐짐
-        calculator.calculator.slideToggle(0);
-        $("#calculatorIcon").click(function(){
-            calculator.calculator.stop().slideToggle();
+
+        // MODAL AND FAQ
+        $('#faqBtn').click(function(){
+            // $('#faq-modal').css({
+            //     'display' : 'block'
+            // });
+            $('#faq-modal').fadeToggle();
+        })
+        $('#faqCloseBtn').click(function(){
+            $('#faq-modal').fadeToggle();
+        })
+        $('.accordion-item .title').click(function(){
+            // $(this).next().stop().slideToggle(300);
+            $(this).siblings('.content').stop().slideToggle(300);
+            $(this).toggleClass('active');
+        })
+        $('.accordion-item .content').click(function(){
+            $(this).stop().slideUp(300);
         })
 
-
-        //전체 객체 잡아서 focus효과주기
-        // console.log($('.container').find('div'));
-        // $('.container').find('div').on('click', function(){
-        //     $(this).addClass('focus');
-        // })
-
-        // 슈퍼 전체 완전 객체를 한개를 만들어서 관리하자
-        // TrashBin을 위한 슈퍼 완전 객체를 만들어서 항상 refresh되도록 하자
-
-        /*
-        new TrashBin({
-            selectorId : getOnlyId(),
-            title : '휴지통',
-            trashBinList : [
-                {
-                    selectorId : getOnlyId(),
-                    title : "Helloworld",
-                    type : "txt",
-                    content : `hello world`,
-                    size : '2MB',
-                    date : getNow()
-                }
-            ]
-        })
-        */
     </script>
     
 </body>

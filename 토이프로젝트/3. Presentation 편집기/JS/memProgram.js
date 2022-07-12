@@ -31,6 +31,9 @@ class Notepad{
         this.notepad.draggable({
             handle : '.top'
         });
+        this.notepad.on('click', function(){
+            alert("hi");
+        })
         this.closeBtn.on('click', function(){
             _this.closeProgram();
         })

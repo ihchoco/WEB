@@ -186,7 +186,7 @@ Box.prototype.runProgram = function(){
 //Palette 전체 배경화면
 function Palette(options){
     this.palette = null;
-    
+    this.showFlag = false;
     this.init(options);
 }
 
@@ -201,10 +201,35 @@ Palette.prototype.init = function(options){
 Palette.prototype.initEvent = function(){
     //console.log("palette initEvent 호출");
     var _this = this;
-    this.palette.on('click', function(){
+    this.palette.on('click', function(e){  
+        console.log("right");
+        _this.showFlag = true;
+        _this.toggleMenu(e);
         _this.clickPalette();
     })
+    this.palette.on('contextmenu', function(e){
+        console.log("left"); //여기서 배경화면 우클릭시 설정탭 메뉴 호출하는걸로 변경
+        _this.showFlag = false;
+        _this.toggleMenu(e);
+        _this.clickPalette();
+    })
+}
 
+Palette.prototype.toggleMenu = function(e){
+    console.log(this.showFlag);
+    console.log(e.clientX);
+    console.log(e.clientY);
+    if(!this.showFlag){
+        $("#backgroundMenuBox").css({
+            'display' : 'block',
+            'left' : e.clientX - 10,
+            'top' : e.clientY - 55
+        });
+    }else{
+        $("#backgroundMenuBox").css({
+            'display' : 'none'
+        });
+    }
 }
 
 Palette.prototype.clickPalette = function(){
