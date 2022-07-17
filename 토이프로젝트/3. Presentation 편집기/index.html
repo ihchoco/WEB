@@ -84,7 +84,7 @@
                             <img src="../Image/background/8.JPG"/>
                         </div>
                         <div>
-                            <input type="button" value="적 용"/>
+                            <!-- <input type="button" value="적 용"/> -->
                         </div>
                     </div>
                     <div class="right">
@@ -282,7 +282,6 @@
     <script>
         $(document).ready(function(){
             //전역객체 생성[모든 객체의 정보를 담고있음]
-            var boxObjList = [];
             // 배경객체 생성
             new Palette({
                 selectorId : 'palette'
@@ -294,7 +293,7 @@
              *  1. 시간 불러오기
              *  2. 저장된 파일 불러오기
              ***************************/
-            
+            window.boxObjList = new Array();
             //0. 초기 함수 호출(init)
             app.init();
 
@@ -308,7 +307,7 @@
             let i = 0;
             readFiles.forEach(file => {
                 // app.boxObjList.push(new Box({
-                boxObjList.push(new Box({
+                window.boxObjList.push(new Box({
                     selectorId : file.selectorId,
                     title : file.title,
                     type : file.type,
@@ -331,8 +330,7 @@
             //     allObjList.push(temp);
             // }
             
-            console.log("boxObjList");
-            console.log(boxObjList);
+            console.log(window.boxObjList);
         
             
             //처음에 보여지기전에 바로 접어놔야지 한번 클릭으로 바로 펼쳐짐

@@ -3,6 +3,7 @@ let app = {
     // boxObjList : new Array(), //여기에 바탕화면에 있는 모든 배열정보를 관리한다.
     init : function(){ //최초 수행할 함수 모두 등록
         
+        let _this = this;
         window.oncontextmenu = function () {
             return false;
         };
@@ -18,8 +19,9 @@ let app = {
             // alert("clearAllFile");
             console.log("clearAllFile");
             console.log(window.boxObjList);
-            // console.log(this.boxObjList);
-            //this.clearLocalStorage(); //저장된 데이터 모두삭제
+            
+            _this.removeAllBoxList();
+            _this.clearLocalStorage(); //저장된 데이터 모두삭제
         })
         
     },
@@ -94,5 +96,10 @@ let app = {
 
         $("#time").text(convHour+":"+convMinute);
         $("#am-pm").text(ampm);
+    },
+    removeAllBoxList : function(){ //바탕화면에 있는 모든 박스 지우기
+        window.boxObjList.forEach(function(box){
+            box.box.remove();
+        })
     }
 }

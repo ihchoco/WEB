@@ -2,14 +2,23 @@ class BackgrondSetting{
     constructor(){
         console.log("background cons")
         this.backgrond = $('#setBackgroundBox');
+        this.imgBoxList = null;
+        this.mainURL = null;
+        this.mainBackgroundObj = null;
 
         //Program 버튼 셋팅
         this.saveBtn = null;
         this.closeBtn = null;
         this.init();
+        
+
     }
     init(){
         console.log("background init");
+        //this.mainURL = $(".container").attr('src');
+        this.mainURL = $('.container').css('background-image');
+        this.mainBackgroundObj = $('.container');
+        console.log("MAIN URL : "+this.mainURL);
         this.exitBtn = this.backgrond.find("#exitBtn"); //클로즈 할때 자동으로 저장?
         this.closeBtn = this.backgrond.find("#closeBtn"); //클로즈 할때 자동으로 저장?
         this.initEvent();
@@ -19,6 +28,15 @@ class BackgrondSetting{
         console.log("background init evemnt");
         var _this = this;
         //draggable 할수있게 해주자
+        
+        //IMGBOX 가져오기
+        // var imgBox = this.background.children(".content").children(".right").find(".bgImgBox");
+        // var imgBox = this.background.find(".bgImgBox");
+        console.log("===============");
+        console.log(this.backgrond.children('.content').find('.bgImgBox'));
+        this.imgBoxList = this.backgrond.children('.content').children('.right').find('.bgImgBox');
+        console.log(this.imgBoxList);
+        
         this.backgrond.draggable({
             handle : '.top'
         });
@@ -27,6 +45,13 @@ class BackgrondSetting{
         })
         this.closeBtn.on('click', function(){
             _this.closeProgram();
+        })
+
+        this.imgBoxList.on('click', function(){
+            console.log(this);
+            let url = $(this).find('img').attr('src');
+            _this.changeMainImage(url);
+            
         })
     }
     exitProgram(){
@@ -38,6 +63,14 @@ class BackgrondSetting{
         console.log("closeProgram");
         //숨기기
         this.backgrond.stop().slideToggle();
+    }
+    changeMainImage(url){
+        console.log("changeMainImage");
+        console.log(url);
+        this.mainBackgroundObj.css('background-image', 'url(' + url + ')');
+        $('#realBackgroundBox').find('img').attr('src', url);
+        
+
     }
 
 }

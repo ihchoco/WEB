@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // 삼각형 공식 : 세변의 길이를 알 때 가장 긴 변의 길이는 무조건 나머지 두개 변의 길이합보다 작아야한다. 같아도 안된다.
+            function solution(a, b, c){
+                let answer = "YES";
+                let max = 0;
+                let leftSum = 0;
+                if(a > b && a > c){
+                    max = a;
+                    letfSum = b+c;
+                }else if(b > a && b > c){
+                    max = b;
+                    leftSum = a+c;
+                }else if(c > a && c > b){
+                    max = c;
+                    leftSum = a+b;
+                }
+
+                console.log(max);
+                
+                if(max >= leftSum) answer = "NO";
+                return answer;
+                
+            }
+
+            console.log(solution(6, 7, 11));
+            console.log(solution(13, 33, 17));
+        </script>
+    </body>
+</html>
