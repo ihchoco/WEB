@@ -6,7 +6,39 @@
     <body>
         <script>
             function solution(arr){
+                let answer = 0;
+                let sum = 0;
+                for(let i = 0; i < arr.length; i++){
+                    sum += arr[i];
+                }
 
+                for(let i = 0; i < arr.length-1; i++){
+                    for(let j = i+1; j < arr.length; j++){
+                        if(sum - (arr[i]+arr[j]) === 100){
+                            console.log(arr[i], arr[j]);
+                        }
+                    }
+                }
+            }
+
+            function solution2(arr){
+                let answer = arr;
+
+                let sum = arr.reduce((a, b) => a + b, 0);
+                // a에는 누적되는 값이 들어오고, b에는 20, 7, 23 ..., 13까지 들어오게 된다.
+                // 뒤에 0은 처음에 a를 0으로 초기화 하라는것이다.
+                console.log(sum); //140
+                for(let i = 0; i < arr.length - 1; i++){
+                    for(let j = i+1; j < arr.length; j++){
+                        console.log(arr[i], arr[j]);
+                        if((sum-(arr[i]+arr[j])) === 100){
+                            //순서를 뒤에있는 j를 먼저 지워주고 앞에있는 i번째를 지운다.
+                            arr.splice(j, 1); //j번째 값을 제거해라
+                            arr.splice(i, 1); //i번째 값을 제거해라
+                        }
+                    }
+                }
+                return answer;
             }
             
             let arr=[20, 7, 23, 19, 10, 15, 25, 8, 13];

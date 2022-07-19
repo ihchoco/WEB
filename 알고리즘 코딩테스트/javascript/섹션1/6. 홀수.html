@@ -6,9 +6,21 @@
     <body>
         <script>
             function solution(arr){
-
+                let answerSum = 0;
+                let answerMin = 999;
+                
+                for(let i = 0; i < arr.length; i++){
+                    if(arr[i] % 2 != 0){
+                        answerSum += arr[i];
+                        if(arr[i] < answerMin){
+                            answerMin = arr[i];
+                        }
+                    }
+                }
+                console.log(answerSum);
+                return answerMin;
             }
-            
+            41+77+53+85
             arr=[12, 77, 38, 41, 53, 92, 85];
             console.log(solution(arr));
         </script>
