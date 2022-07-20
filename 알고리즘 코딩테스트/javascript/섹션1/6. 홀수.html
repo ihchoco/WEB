@@ -20,9 +20,26 @@
                 console.log(answerSum);
                 return answerMin;
             }
-            41+77+53+85
+
+            function solution2(arr){
+                let answer=[];
+                let sum = 0, min = Number.MAX_SAFE_INTEGER; //min에 높은값을 넣는것을 습관화하자
+                for(let x of arr){
+                    if(x % 2 === 1){
+                        sum += x;
+                        if(x < min) min = x;
+                    }
+                }
+                answer.push(sum);
+                answer.push(min);
+
+                return answer;
+            }
+
+            //41+77+53+85
             arr=[12, 77, 38, 41, 53, 92, 85];
             console.log(solution(arr));
+            console.log(solution(arr2));
         </script>
     </body>
 </html>
