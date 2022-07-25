@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // forEach, map, filter, reduce
+
+            // function forEach(predicate, thisArg){
+            //     for(let i = 0; i < a.length; i++){
+            //         predicate(a[i], i);
+            //     }
+            // }
+
+            a = [10, 11, 12, 13, 14, 15];
+
+            a.forEach(function(v, i){
+                console.log(v, i);
+            });
+
+            a.forEach(function(v, i){
+                console.log(v, i);
+            }, [1, 2]);
+
+
+            function map(predicate, thisArg){
+                let list=[];
+                for(let i = 0; i < a.length; i++){
+                    list.push(predicate(a[i], i));
+                }
+                return list;
+              }
+
+            //map은 무엇인가?
+            //map은 새로운 배열을 생성한다.
+            //map은 새로운 배열을 생성하는데 원본과 동일한 길이인 배열로 생성한다.
+            let answer = a.map(function(v, i){
+                return v*v;
+            }, [1, 2]);
+
+            //결과값 answer = [100, 121, 144, ..., 225]
+
+
+            let answer3 = a.map(function(v, i){
+                if(v%2 == 0) return v;
+            }, [1, 2]);
+
+            //결과값 answer = [10, undefined, 12, undefine, 14, undefined]
+            
+
+            function filter(predicate, thisArg){
+                let list = [];
+                for(let i = 0; i < a.length; i++){
+                    if(predicate(a[i], i)) list.push(a);
+                }
+                return list;
+            }
+
+            //filter는 무엇인가?
+            //정확히 원하는 리턴되는 것들만 배열로 만들어서 준다. map과 비슷하지만 undefined가 없어짐
+            //필터는 원본요소들 중에서 그 값들만 뽑아서 주기때문에 새로운값이 들어가지 않는다. 
+            //새로운값 X
+            //정말 원본에서 필터걸어서 추출하는것!! 이름 그대로 필터
+            let answer2 = a.filter(function(v, i){
+                return v%2==0;
+            }, [1, 2]);
+
+            //결과값 answer = [10, 12, 14]
+
+
+            //reduce는 무엇인가?
+            //reduce는 배열이 아닌 값을 리턴한다.
+            
+            function reduce(predicate, val){
+                let result = val;
+                for(let i = 0; i < a.length; i++){
+                    result = predicate(result, a[i]);
+                }
+                return result;
+            }
+
+            a=[10, 11, 12, 13, 14, 15];
+            answer = a.reduce(function(aa, v){
+                return acc + v;
+            }, 0);
+            console.log(answer);
+
+
+            
+
+
+        </script>
+    </body>
+</html>

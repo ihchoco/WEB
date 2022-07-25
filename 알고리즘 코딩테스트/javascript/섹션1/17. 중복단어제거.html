@@ -6,7 +6,15 @@
     <body>
         <script>
             function solution(s){  
-                let answer;
+                let answer = new Array();
+
+                for(let x of s){
+                    flag = true;
+                    for(let tx of answer){
+                        if(tx == x) flag = false;
+                    }
+                    if(flag) answer.push(x);
+                }
 
                 return answer;
             }

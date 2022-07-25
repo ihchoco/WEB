@@ -6,32 +6,36 @@
     <body>
         <script>
             function solution(s){
-
-            }
-            
-            let str="BANANA";
-            console.log(solution(str));
-        </script>
-    </body>
-</html>
-
-
-
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>출력결과</title>
-    </head>
-    <body>
-        <script>
-            function solution(s){
-                let answer=s;
-                answer=answer.replace(/A/g, "#");
+                let answer = "";
+                for(let i = 0; i < s.length; i++){
+                    if(s[i] == 'A'){
+                        answer[i]='#'  
+                    }else{
+                        answer[i] = s[i]
+                    }
+                }
                 return answer;
             }
+
+            function solution2(s){
+                let answer=s; //일반 배열이면 얕은 복사 : 값을 수정하면 원본도 같이 수정된다. 주소 참조방식 but 문자열은 갑이 복사가 되는것.
+                //문자열의 경우는 위와같이 하면 주소값이 아닌 그냥 일반 값이 복사되기 때문에 주의해야한다. 그래서 answer 와 s를 별개로 보고 처리
+    
+                //s = s.replace(/A/, '#') // /A/ A라는 대문자를 찾아서, '#' #으로 바꿔라 첫번째 A만 #으로 바뀜
+                answer = answer.replace(/A/g, '#') // /A/ A라는 대문자를 찾아서, '#' #으로 바꿔라
+                console.log(answer); //여기에 보면 1개는 #으로 바꾸고 끝나지만 이걸 글로벌 하게 전체 바꿔주려면 g를 추가해준다 /A/g 
+                //              /원하는 문자/g 를 해준면 된다. 
+                return answer;
+            }
+
+            function solution3(s){
+
+            }
             
             let str="BANANA";
             console.log(solution(str));
+            console.log(solution2(str));
+            console.log(solution3(str));
         </script>
     </body>
 </html>

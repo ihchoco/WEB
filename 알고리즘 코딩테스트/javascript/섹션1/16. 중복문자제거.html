@@ -7,8 +7,38 @@
         <script>
             function solution(s){  
                 let answer="";
+                for(let x of s){
+                    flag = true;
+                    for(let tx of answer){
+                        if(tx == x) flag = false;
+                    }
+                    if(flag) answer += x;
+                }
 
                 return answer;
+            }
+
+            function solution2(s){
+                let answer = "";
+                // console.log(s.indexOf('k')); //처음으로 나오는 K(0)
+                // console.log(s.indexOf('k', 1)); //두번째로 나오는 k(3)
+                // console.log(s.indexOf('z')); //못찾으면 -1
+                
+                for(let i = 0; i < s.length; i++){
+                    console.log(s[i], i, s.indexOf(s[i]));
+                    if(s.indexOf(s[i]) === i) answer++; //i와 indexOf의 값이 같으면 첫번째 나오는것, 다르면 중복되는값으로 앞에서 이미 값이 나온경우
+                }
+
+                return answer;
+            }
+
+            function solution3(s){
+                let answer = 0;
+                let pos = s.indexOf('k');
+                while(pos !== -1){
+                    answer++;
+                    pos = s.indexOf('k', pos+1);
+                }
             }
             console.log(solution("ksekkset"));
         </script>

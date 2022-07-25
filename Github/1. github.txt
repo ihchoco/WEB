@@ -33,4 +33,7 @@
 15. git commit -m "second commit"
 16. git push origin master
 
+17. git push --force origin master
+
+
 이렇게 다시 해주면 된다.

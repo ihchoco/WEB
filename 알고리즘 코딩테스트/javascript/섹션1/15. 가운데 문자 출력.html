@@ -7,9 +7,50 @@
         <script>
             function solution(s){  
                 let answer;
+                let idx;
+                if(s.length % 2 == 1){ //홀수
+                    idx = Math.ceil(s.length / 2);
+                    answer = s[idx - 1];
+                }else{ //짝수
+                    idx = s.length / 2;
+                    answer = s[idx - 1];
+                    answer += s[idx];
+                }
+                
 
                 return answer;
             }
+            function solution2(s){
+                let answer;
+                let mid = Math.floor(s.length / 2);
+                if(s.length % 2 ==  1) answer = s.subsring(mid, mid+1);
+                else answer = s.substring(mid-1 , mid+1);
+
+
+                //아래와 같이도 쓸 수 있다.
+                // if(s.length % 2 ==  1) answer = s.subsrr(mid, 1);
+                // else answer = s.substring(mid-1 , 2);
+                
+
+                //문자열.substring(2, 3); 
+                // 0 1 2 3 4
+                // s t u d y
+
+                //문자열.substring(2, 3) = 2번 인덱스부터 3번 인덱스 전까지 
+                // u 하나만 출력됨
+                // 만약 substring(2, 5) = 2번 인덱스부터 5번 인덱스 전까지
+                // u d y
+
+                //문자열.substr(1, 3) = 2번 인덱스부터 3개를 뽑아내라 
+                // 0 1 2 3 4
+                // s t u d y
+                // t u d 이러
+
+                
+
+                return answer;
+            }
+
             console.log(solution("study"));
         </script>
     </body>
