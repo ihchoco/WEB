@@ -32,15 +32,19 @@
                 return answer;
             }
 
+            // k가 s에 몇개 들어있는지 확인하는 함수
             function solution3(s){
                 let answer = 0;
                 let pos = s.indexOf('k');
                 while(pos !== -1){
                     answer++;
                     pos = s.indexOf('k', pos+1);
+                    console.log(pos);
                 }
             }
             console.log(solution("ksekkset"));
+            // console.log(solution("ksekkset"));
+            console.log(solution3("ksekkset"));
         </script>
     </body>
 </html>

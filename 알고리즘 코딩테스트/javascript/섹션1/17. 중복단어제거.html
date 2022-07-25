@@ -18,8 +18,25 @@
 
                 return answer;
             }
+
+            function solution2(s){
+                let answer;
+
+                console.log(s.indexOf("time"));
+
+                // answer = s.filter(function(v, i){
+                //     console.log(v, i);
+                //     if(s.indexOf(v) === i) return true; //참이 되는것만 뽑아서 리턴하겠다. 이게 filter이다. //s.indexOf와 i의 값이 같아야지 첫번째 값. 다르면 중복되는 값이 이미 나온경우
+                // });
+                answer = s.filter(function(v, i){
+                    return s.indexOf(v) === i; // 참 일때에만 return True해준다.
+                });
+
+                return answer;
+            }
             let str=["good", "time", "good", "time", "student"];
             console.log(solution(str));
+            console.log(solution2(str));
         </script>
     </body>
 </html>
