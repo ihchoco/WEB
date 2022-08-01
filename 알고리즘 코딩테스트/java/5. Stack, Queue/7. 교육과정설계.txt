@@ -1,0 +1,15 @@
+import java.util.*;
+class Main {	
+	public String solution(String need, String plan){
+		String answer="YES";
+		
+		return answer;
+	}
+	public static void main(String[] args){
+		Main T = new Main();
+		Scanner kb = new Scanner(System.in);
+		String a=kb.next();
+		String b=kb.next();
+		System.out.println(T.solution(a, b));
+	}
+}

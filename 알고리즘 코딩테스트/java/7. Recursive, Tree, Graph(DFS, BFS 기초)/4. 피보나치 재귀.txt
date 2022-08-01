@@ -1,0 +1,13 @@
+import java.util.*;
+class Main {
+	public int DFS(int n){
+
+	}
+	public static void main(String[] args){
+		Main T = new Main();
+		int n=10;
+		for(int i=1; i<=n; i++) System.out.print(T.DFS(i)+" ");
+	}	
+}
+
+

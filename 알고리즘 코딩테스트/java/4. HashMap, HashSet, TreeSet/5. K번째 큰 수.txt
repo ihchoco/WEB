@@ -1,0 +1,20 @@
+import java.util.*;
+class Main {	
+	public int solution(int[] arr, int n, int k){
+		int answer=-1;
+		
+		return answer;
+	}
+
+	public static void main(String[] args){
+		Main T = new Main();
+		Scanner kb = new Scanner(System.in);
+		int n=kb.nextInt();
+		int k=kb.nextInt();
+		int[] arr=new int[n];
+		for(int i=0; i<n; i++){
+			arr[i]=kb.nextInt();
+		}
+		System.out.println(T.solution(arr, n, k));
+	}
+}
