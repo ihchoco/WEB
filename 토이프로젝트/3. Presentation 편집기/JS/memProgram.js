@@ -32,7 +32,7 @@ class Notepad{
             handle : '.top'
         });
         this.notepad.on('click', function(){
-            alert("hi");
+            //alert("hi");
         })
         this.closeBtn.on('click', function(){
             _this.closeProgram();

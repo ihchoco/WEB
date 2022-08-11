@@ -1,15 +1,43 @@
-import java.util.*;
-class Main {	
-	public String solution(String str){
-		String answer="";
+package com.coding.java06;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+	
+	public String solution(String str) {
+		String answer = "";
+		
+		for(char x : str.toCharArray()) {
+			boolean flag = true;
+			for(char y : answer.toCharArray()) {
+				if(x == y) {
+					flag = false;
+					break;
+				}
+			}
+			if(flag) answer += x;
+		}
 		
 		return answer;
 	}
-
-	public static void main(String[] args){
-		Main T = new Main();
-		Scanner kb = new Scanner(System.in);
-		String str=kb.next();
-		System.out.print(T.solution(str));
+	
+	
+	
+	
+	public static void main(String args[]) {
+		Main t = new Main();
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String str = scan.next();
+		
+		//a = 97 ~ 122
+		//A = 65 ~ 90
+		
+		
+		System.out.println(t.solution(str));
+		
+		
 	}
 }
