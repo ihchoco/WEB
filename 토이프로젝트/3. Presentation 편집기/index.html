@@ -13,15 +13,14 @@
 
     <div class="container">
         <article class="hero">
-            <span>☂︎</span>
             <span>
                 <span id="day">토</span>, 
                 <span id="month-date">6월 11</span> 
                 <span id="time">8:42</span>
                 <span id="am-pm">오후</span>
             </span>
-            <span>배터리</span>
-            <span>검색</span>
+            <span></span>
+            <span></span>
             <span class="faq-btn" id="faqBtn">FAQ</span>
         </article>
         <article class="palette">
@@ -33,8 +32,8 @@
                 <div class="info" id="clearAllFile">
                     모두 지우기
                 </div>
-                <div class="info" id="copyFileBtn">
-                    새 폴더 만들기
+                <div class="info" id="resetBtn">
+                    초기화 하기
                 </div>
                 <div class="info" id="showInfoBtn">
                     버전 확인하기
@@ -129,8 +128,8 @@
                     
                 </div>
                 <div class="bottom">
-                        <span>length : <span class='length'>0</span> /</span>
-                        <span>last-date : 2022-06-11 09:12:32</span>
+                        <span><input type="button" value="완전삭제" onclick="trashBin.clean()"></span>
+                        <span><input type="button" value="복 구" onclick="trashBin.recover()"></span>
                 </div>
             </div>
             <!-- 프로그램(메모)  -->
@@ -144,7 +143,7 @@
                 </div>
                 <div class="bottom">
                         <span>length : <span class='length'>0</span> /</span>
-                        <span>last-date : 2022-06-11 09:12:32</span>
+                        <span class = "date">last-date : 2022-08-13 09:12:32</span>   
                 </div>
             </div>
 
@@ -190,7 +189,105 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 프로그램(todoList) -->
+
+            <div class="todoList" id="todoList">
+                <div class="top">
+                    <div class="left">
+                        <span id="exitBtn"></span>
+                        <span id="closeBtn"></span>
+                        <span id="resizeBtn"></span>
+                    </div>
+                    <div></div>
+                </div>
+
+                <div class="content">
+                    <div class="row active">
+                        <div class="checkbox">
+                            <i class="fa fa-check"></i>
+                        </div>
+
+                        <div class="todo">
+                            Make Something Awesome
+                        </div>
+
+                        <div class="etc">
+                            <div>2022-08-12</div>
+                            <div><i class="fa fa-times"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="checkbox">
+                            <i class="fa fa-check"></i>
+                        </div>
+
+                        <div class="todo">
+                            Make Something Awesome
+                        </div>
+
+                        <div class="etc">
+                            <div>2022-08-12</div>
+                            <div><i class="fa fa-times"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <input type="text" id="todoInput" placeholder="Record Your TODO">
+                    <input type="button" id="todoSaveButton" value="저 장" onkeyup="todoList.enterKey()">
+                </div>
+            </div>
            
+            <!-- 프로그램(크롬브라우저) -->
+            <div class="chrome" id="chrome">
+                <div class="top">
+                    <div class="btns">
+                        <span id="exitBtn"></span>
+                        <span id="closeBtn"></span>
+                        <span id="resizeBtn"></span>
+                    </div>
+                    <div class="tabs" id="chromeTabBox">
+                        <div id="targetTabBox">
+
+                        </div>
+                        <!-- <div class="browserTabBox active" id="mainTabTitle">
+                            <p class="tabTitle">google chrome</p>
+                            <p class="tabCloseBtn">X</p>
+                        </div> -->
+                        <!-- <div class="browserTabBox">
+                            <p class="tabTitle">업무용 메모PC</p>
+                            <p class="tabCloseBtn">X</p>
+                        </div> -->
+                        <div class="tabPlusBtn">
+                            <i class="fa fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="addressBar">
+                    <div class="btns">
+                        <span><i class="fa fa-arrow-left"></i></span>
+                        <span><i class="fa fa-arrow-right"></i></span>
+                        <span><i class="fa fa-repeat"></i></span>
+                        <span><i class="fa fa-home"></i></span>
+                    </div>
+                    <div class="addressBox">
+                        <input type="text" placeholder="URL 입력 주소창" id="browser_address">
+                    </div>
+                </div>
+
+                <div class="content" id="chromeIframeBox">
+                    <!-- <iframe src="https://www.google.com/webhp?igu=1" style="border: none;" id="browserFrame">
+                        현재 사용중인 브라우저는 Iframe 요소를 지원하지 않습니다.
+                    </iframe>
+                    <iframe src="https://www.google.com/webhp?igu=1" style="border: none; display : none;" id="browserFrame2">
+                        현재 사용중인 브라우저는 Iframe 요소를 지원하지 않습니다.
+                    </iframe> -->
+
+                </div>
+            </div>
+
+
             <!-- 미작업(box 오른쪽 클릭시 이벤트) -->
             <div class="infoBoxContainer" id="trashBinInfoBox">
                 <div class="infoBox" id="infoBox">
@@ -231,6 +328,11 @@
             <div class="docIcon">
                 <div class="imageBox" id="chromeIcon">
                     <img src="../Image/chrome.png">
+                </div>
+            </div>
+            <div class="docIcon">
+                <div class="imageBox" id="todoListIcon">
+                    <img src="../Image/todolist.png">
                 </div>
             </div>
         </article>
@@ -279,6 +381,8 @@
     <script src="JS/trashBin.js"></script>
     <script src="JS/calculator.js"></script>
     <script src="JS/background.js"></script>
+    <script src="JS/todoList.js"></script>
+    <script src="JS/chrome.js"></script>
     <script>
         $(document).ready(function(){
             //전역객체 생성[모든 객체의 정보를 담고있음]
@@ -303,7 +407,9 @@
 
 
             //2. 저장된 파일 불러오기(LocalStorage)
-            let readFiles = app.getAllFile();
+            //2-1. 바탕화면 파일들
+            let readFiles = app.getAllFile("files");
+            console.log("readFiles : "+readFiles);
             let i = 0;
             readFiles.forEach(file => {
                 // app.boxObjList.push(new Box({
@@ -317,30 +423,17 @@
                 }));
                 i++;
             });
-            // for(var i = 0; i < 1; i++){
-            //     let temp = new Box({
-            //         allObjList : allObjList,
-            //         selectorId : getOnlyId()+i,
-            //         title : "Helloworld"+i,
-            //         type : "txt",
-            //         content : `hello world`,
-            //         size : '10',
-            //         date : getNow()
-            //     });
-            //     allObjList.push(temp);
-            // }
-            
-            console.log(window.boxObjList);
-        
-            
-            //처음에 보여지기전에 바로 접어놔야지 한번 클릭으로 바로 펼쳐짐
-            calculator.calculator.slideToggle(0);
-            $("#calculatorIcon").click(function(){
-                calculator.calculator.stop().slideToggle();
-            })
 
+        
             //4. 셋팅(백그라운드)
-            var background = new BackgrondSetting();
+            let backgroundURL = app.getFile("backgroundURL");
+            // console.log("backgroundURL");
+            // console.log(backgroundURL);
+            var background = new BackgrondSetting({
+                 url : backgroundURL
+                // url : ''
+            });
+        
         });
 
         //부가적인 함수
@@ -354,6 +447,13 @@
 
         // DOC 프로그램 실행
         //1. 휴지통
+        var superTrashBin = new Array(); //휴지통 배열
+        let trashBinList = app.getAllFile("trashBinList");
+        if(trashBinList.length != 0){
+            superTrashBin = trashBinList;
+        }        
+        console.log("superTrashBin 호출");
+        console.log(superTrashBin);
         var trashBin = new TrashBin({
             selectorId : getOnlyId(),
             title : '휴지통',
@@ -381,6 +481,7 @@
             notepad.notepad.stop().slideToggle();
         })
 
+
         //3. 계산기
         var calculator = new Calculator({
             title : '계산기',
@@ -388,6 +489,53 @@
             size : 0,
             date : getNow(),
             selfFlag : 0
+        });
+
+        calculator.calculator.slideToggle(0);
+        $("#calculatorIcon").click(function(){
+            calculator.calculator.stop().slideToggle();
+        })
+
+        //4. TODOLIST(todoList 데이터 불러오기)
+        let readTodoList = app.getAllFile("todoList");
+
+        var todoList = new TodoList({
+            selector : 'todoList',
+            title : '투두리스트',
+            content : '',
+            size : 0,
+            date : getNow(),
+            selfFlag : 0,
+            todoListArray : readTodoList
+        })
+        todoList.todoList.slideToggle(0);
+        $("#todoListIcon").click(function(){
+            todoList.todoList.stop().slideToggle();
+        });
+
+        //5. 브라우저(Chrome)
+
+        //5-1. TAB정보 만들기
+        let tabList = new Array();
+        let mainTab = {
+            'title' : 'chrome',
+            'url' : 'https://www.google.com/webhp?igu=1',
+            'id' : '0'
+        }
+        tabList.push(mainTab);
+
+        let browser = new Chrome({
+            selector : 'chrome',
+            title : '크롬',
+            content : '',
+            size : 0,
+            tabList : tabList,
+            selfFlag : 0
+        });
+
+        //browser.chrome.slideToggle(0);
+        $("#chromeIcon").click(function(){
+            browser.chrome.stop().slideToggle();
         });
 
         // MODAL AND FAQ

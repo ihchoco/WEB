@@ -1,4 +1,4 @@
-var superTrashBin = new Array(); //휴지통 배열
+// var superTrashBin = new Array(); //휴지통 배열
 // DOC 프로그램 실행
 
 
@@ -74,7 +74,7 @@ Box.prototype.optionSet = function(options){
 }
 
 Box.prototype.init = function(options){
-    // //console.log("init 호출");
+    console.log("BOX init 호출");
     // BOX 기본정보 셋팅
     this.box = $("#"+options.selectorId);
     // //console.log(this.box);
@@ -165,6 +165,15 @@ Box.prototype.moveToTrashBin = function(){
         //console.log(superTrashBin);
         trashBin.refresh();
         this.box.remove();
+        console.log(this);
+        console.log(this.selectorId);
+
+        console.log(app.fileList);
+        //여기서 바탕화면에 있는 박스 저장하는 부분 삭제처리를 위한 로직
+        app.fileList = app.fileList.filter(box =>
+            box.selectorId != this.selectorId    
+        )
+        app.saveAllFile();
     // }
 }
 

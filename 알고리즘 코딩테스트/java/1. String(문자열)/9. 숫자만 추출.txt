@@ -1,16 +1,63 @@
-import java.util.*;
-class Main {	
-	public int solution(String s){
-		//int answer=0;
-		String answer="";
-		
-		return Integer.parseInt(answer);
-	}
+package com.coding.java09;
 
-	public static void main(String[] args){
-		Main T = new Main();
-		Scanner kb = new Scanner(System.in);
-		String str=kb.next();
-		System.out.print(T.solution(str));
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+	
+	public String solution(String str) {
+		String answer = "";
+		
+		for(char x : str.toCharArray()) {
+			if(answer.length() == 0 && (int)x == 48) {
+				continue;
+			}
+				
+			if((int)x >= 48 && (int)x <= 57) {
+				answer += x;
+			}
+		}
+		
+		return answer;
+	}
+	
+	public int solution2(String str) {
+		int answer = 0;
+		
+		// 1. x > 48 && x <= 57
+		// 2. answer = answer * 10 + (x - 48)
+		
+		for(char x : str.toCharArray()) {	
+			if(x >= 48 && x <= 57) answer = answer * 10 + (x - 48);		
+		}
+		
+		
+		
+		return answer;
+	}
+	
+	public int solution3(String s) {
+		String answer = "";
+		for(char x : s.toCharArray()) {
+			if(Character.isDigit(x)) answer += x;
+			//Character.isDigit()  숫자인경우 true
+		}
+		return Integer.parseInt(answer); //String 0208 > int 208로 변환된다.
+	}
+	
+	
+	
+	
+	public static void main(String args[]) {
+		Main t = new Main();
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String str = scan.nextLine();
+		
+		//System.out.println(t.solution(str));
+		System.out.println(t.solution2(str));
+		
+		
 	}
 }

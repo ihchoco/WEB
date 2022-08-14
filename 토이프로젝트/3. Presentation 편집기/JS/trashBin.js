@@ -20,18 +20,20 @@ class TrashBin{
         //trashBin에 들어있는 휴지통 프로그램
         this.trashBinList = new Array();
 
-        this.init();
+        this.init(options);
     }
-    init(){
+    init(options){
         this.closeBtn = this.trashBin.find("#closeBtn");
-        
+       
         console.log(this.contentBox);
         this.initEvent();
         this.showTrashBinCount();
 
         //title 입력
         this.trashBin.find('#trashBin-title').text(this.title);
-    
+        
+        //trashBin refresh
+        this.refresh();
     }
     initEvent(){
         var _this = this;
@@ -82,9 +84,47 @@ class TrashBin{
 
             this.trashBin.find('.content').append(box);
         }
+        //refresh 될 때 localstorage에 같이 저장하는 로직 추가
+        console.log("trashBInLIST refresh 저장부분");
+        console.log(superTrashBin);
+        app.saveAllWithParam("trashBinList", superTrashBin);
     }
     clean(){
-        console.log("clean");
+        console.log("clean 호출");
+        superTrashBin = new Array();
+        this.refresh();
+    }
+    recover(){
+        console.log("recover 호출");
+        console.log(superTrashBin);
+        superTrashBin.forEach(trash =>{
+            app.putFile(trash);
+            this.makeBox(trash);
+        })
+
+        superTrashBin = new Array();
+        this.refresh();
+        
+        app.saveAllFile();
+    }
+
+    //이부분은 임시로 복구 로직을 구현한 것으로 BOX클래스의 메소드와 유사하니 추후에 수정필요
+    makeBox(trashBox){
+        console.log(trashBox);
+        console.log(trashBox.selectorId);
+        window.boxObjList.push(new Box({
+            selectorId : trashBox.selectorId,
+            title : trashBox.title,
+            type : trashBox.type,
+            content : trashBox.content,
+            size : trashBox.size,
+            date : trashBox.date
+        }));
+
+    }
+
+    getOnlyId(){
+        return `box_${Date.now()}`;
     }
 
 }

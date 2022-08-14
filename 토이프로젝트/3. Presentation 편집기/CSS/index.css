@@ -313,6 +313,7 @@ img{
     color: white;
     z-index: 10;
     border-radius: 10px;
+    overflow: hidden;
 }
 .container .palette .infoBox.show{
     display : block;
@@ -381,6 +382,8 @@ img{
     z-index: 100;
     display: block;
     margin-top: 10px;
+    top : 100px;
+    left : 200px;
     
 }
 
@@ -394,7 +397,18 @@ img{
 .container .trashbin .bottom{
     background-color: #1c76c1;
 }
+.container .trashbin .bottom input[type="button"]{
+    padding: 8px 20px;
+    border : 0px;
+    width: 100px;
+    background-color: #FFEB60;
+    border-radius: 5px;
+}
 
+.container .trashbin .bottom input[type="button"]:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
 /* 프로그램(계산기) */
 .container .calculator{
     display: block;
@@ -477,6 +491,298 @@ img{
     flex: 2;
 }
 
+/* 투두리스트 */
+.container .palette .todoList{
+    position: absolute;
+    /* top: 50px; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    top: 10px;
+    right: 100px;
+    width: 600px;
+    background: whitesmoke;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 9999;
+    /* display: none; */
+}
+
+.container .palette .todoList .top{
+    border-bottom: 1px solid rgb(43, 43, 43);
+    padding: 10px 30px;
+    display : flex;
+    justify-content: space-between;
+    background-color: white;
+    color: rgb(45, 91, 192);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.container .palette .todoList.focus .top:after{
+    /* content : '[ENTER ON]'; */
+    font-size: 12px;
+    line-height: 15px;
+    text-align: left;
+    color: black;
+}
+
+.container .palette .todoList .top div span{
+    display : inline-block;
+    width : 15px;
+    height: 15px;
+    background-color: gray;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.container .palette .todoList .top div span:nth-child(1){
+    background-color: rgb(205, 75, 75);
+    content: "x";
+    color: white;
+}
+
+.container .palette .todoList .top div span:nth-child(2){
+    background-color: yellow;
+    content: "_";
+    color: white;
+}
+
+.container .palette .todoList .top div span:nth-child(3){
+    background-color: rgb(87, 238, 76);
+    content: "⎅";
+    color: white;
+}
+.container .palette .todoList .content{
+    font-size : 16px;
+    text-align : right;
+    width: 102%;
+    overflow : scroll;
+    color: #000;
+    height : 450px;
+}
+
+.container .palette .todoList .all-row{
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+}
+.container .palette .todoList .all-row .noTodoContent{
+    font-size : 16px;
+    text-align : center;
+    width: 100%;
+    height : 450px;
+    padding : 150px 0px;
+    overflow : hidden;
+    color: rgb(47, 83, 201);                                                 
+}
+
+.container .palette .todoList .content .row{
+    padding: 20px 0px;
+    background-color: whitesmoke;
+    border-bottom : 1px solid black;
+    display: flex;
+    cursor: pointer;
+}
+
+.container .palette .todoList .content .row.active{
+    background-color: rgba(161, 161, 161, 0.966);
+    color: rgba(209, 209, 209, 0.808);
+}
+
+.container .palette .todoList .content .row.active .todo{
+    text-decoration: line-through;
+}
+
+.container .palette .todoList .content .row div{
+}
+
+.container .palette .todoList .content .row .checkbox{
+    text-align: center;
+    flex: 1;
+}
+.container .palette .todoList .content .row .todo{
+    text-align : left;
+    flex: 7;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word;
+    line-height: 1.2em;
+    height: 1.2em; /* line-height 가 1.2em 이고 3라인을 자르기 때문에 height는 1.2em * 3 = 3.6em */
+}
+.container .palette .todoList .content .row .etc{
+    flex: 2;
+}
+.container .palette .todoList .content .row .etc div{
+     display: inline-block;
+     padding-right: 10px;
+}
+.container .palette .todoList .bottom{
+    padding: 20px;
+    background-color: rgb(51, 99, 201);
+}
+.container .palette .todoList .bottom input[type="text"]{
+    border: 0px;  
+    padding: 14px;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.925);
+    border-radius: 5px;
+}
+ 
+.container .palette .todoList .bottom input[type="button"]{
+    border: 0px;  
+    padding: 12px;
+    width: 9%;
+    background-color: rgba(255, 255, 255, 0.925);
+    border-radius: 5px;
+    transform: translateX(10px);
+    text-align: center;
+}
+
+ 
+/* END */
+
+/* Chrome 브라우저 */
+
+.container .palette .chrome{
+    position: absolute;
+    /* top: 50px; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    top: 10px;
+    left: 100px;
+    width: 800px;
+    background: whitesmoke;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 9999;
+    /* display: none; */
+}
+
+.container .palette .chrome .top{
+    border-bottom: 1px solid rgb(43, 43, 43);
+    display : flex;
+    background-color: rgba(33, 30, 30, 0.896);
+    color: rgb(45, 91, 192);
+    font-size: 18px;
+    cursor: pointer;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container .palette .chrome .top .btns span{
+    transform: translateX(10px);
+    display : inline-block;
+    width : 15px;
+    height: 15px;
+    background-color: gray;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.container .palette .chrome .top .btns span:nth-child(1){
+    background-color: rgb(205, 75, 75);
+    content: "x";
+    color: white;
+}
+
+.container .palette .chrome .top .btns span:nth-child(2){
+    background-color: yellow;
+    content: "_";
+    color: white;
+}
+
+.container .palette .chrome .top .btns span:nth-child(3){
+    background-color: rgb(87, 238, 76);
+    content: "⎅";
+    color: white;
+}
+.container .palette .chrome .top .tabs {
+    /* width: 750px; */
+    flex: 1;
+    margin-left : 30px;
+    color: rgb(147, 147, 147);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.container .palette .chrome .top .tabs #targetTabBox{
+    display: flex;
+}
+.container .palette .chrome .top .tabs .browserTabBox{
+    border-right : 1px solid rgb(94, 90, 90);
+    padding: 10px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+.container .palette .chrome .top .tabs .browserTabBox.active{
+    border : 1px solid rgb(32, 32, 32);
+    padding: 10px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: rgb(32, 32, 32);
+}
+.container .palette .chrome .top .tabPlusBtn {
+    flex: 1;
+    font-size: 14px;
+    color: rgb(147, 147, 147);
+    margin-left: 20px;
+    cursor: pointer;
+}
+.container .palette .chrome .addressBar{
+    font-size : 16px;
+    width: 102%;
+    overflow : scroll;
+    color: rgb(147, 147, 147);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    overflow: hidden;
+    background-color: rgb(32, 32, 32);
+}
+.container .palette .chrome .addressBar .btns{
+    flex: 1;
+}
+.container .palette .chrome .addressBar .btns span{
+    display: inline-block;
+    padding: 0px 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.container .palette .chrome .addressBar .btns span:hover{
+    opacity: 0.7;
+}
+.container .palette .chrome .addressBar .addressBox{
+    flex: 5;
+}
+.container .palette .chrome .addressBar .addressBox input[type="text"]{
+    padding: 5px;
+    width: 95%;
+    border: 20px;
+    border: 1px solid black;
+    overflow: hidden;
+    border-radius: 2px;
+}
+.container .palette .chrome .content{
+    width: 100%;
+    height : 450px;
+    overflow: hidden;
+}
+.container .palette .chrome .content iframe{
+    width: 100%;
+    height: 100%;
+}
+
+/* END */
+
 
 .container .footer{
     height: 100px;
@@ -517,6 +823,9 @@ img{
 
 #chromeIcon{
     transform: translateY(10px);
+}
+#todoListIcon{
+    transform: translateY(5px);
 }
 
 

@@ -1,5 +1,5 @@
 class BackgrondSetting{
-    constructor(){
+    constructor(options){
         console.log("background cons")
         this.backgrond = $('#setBackgroundBox');
         this.imgBoxList = null;
@@ -9,11 +9,11 @@ class BackgrondSetting{
         //Program 버튼 셋팅
         this.saveBtn = null;
         this.closeBtn = null;
-        this.init();
+        this.init(options);
         
 
     }
-    init(){
+    init(options){
         console.log("background init");
         //this.mainURL = $(".container").attr('src');
         this.mainURL = $('.container').css('background-image');
@@ -21,6 +21,12 @@ class BackgrondSetting{
         console.log("MAIN URL : "+this.mainURL);
         this.exitBtn = this.backgrond.find("#exitBtn"); //클로즈 할때 자동으로 저장?
         this.closeBtn = this.backgrond.find("#closeBtn"); //클로즈 할때 자동으로 저장?
+
+        console.log(options.url);
+        if(options.url.length != 0){
+            this.changeMainImage(options.url);
+        }
+
         this.initEvent();
     }
     initEvent(){
@@ -70,7 +76,7 @@ class BackgrondSetting{
         this.mainBackgroundObj.css('background-image', 'url(' + url + ')');
         $('#realBackgroundBox').find('img').attr('src', url);
         
-
+        app.saveAllWithParam("backgroundURL", url);
     }
 
 }

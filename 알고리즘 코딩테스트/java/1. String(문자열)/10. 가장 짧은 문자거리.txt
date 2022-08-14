@@ -1,18 +1,123 @@
-import java.util.*;
-class Main {	
-	public int[] solution(String s, char t){
-		int[] answer=new int[s.length()];
+package com.coding.java10;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+	
+	public String solution(String str, String c) {
+		String answer = "";
+		
+		//teachermode e
+		int ePos = 0;
+		int cnt = 0;
+		for(char x : str.toCharArray()) {
+			
+			if(x == 'e') {
+				answer += 0;
+				ePos = cnt; 
+			}else {
+				
+				int xpos = str.indexOf(x);
+				int left = str.indexOf('e', ePos-1);
+				int right = str.indexOf('e', ePos+1);
+				int addNum = 0;
+				if(Math.abs(left - xpos) > Math.abs(right - xpos)) {
+					addNum = Math.abs(right - xpos);
+				}else 
+					addNum = Math.abs(left - xpos);
+				
+				//System.out.println("x : "+x+", xpos : "+xpos+" , left : "+left+" , right : "+right+" , abs : "+addNum);
+				
+				answer += addNum;	
+			}
+			
+			if(!(cnt == (str.length() - 1))) {
+				answer += " ";
+			}
+			
+			cnt++;
+			
+		}
+		
+		
+		
 		return answer;
 	}
-
-	public static void main(String[] args){
-		Main T = new Main();
-		Scanner kb = new Scanner(System.in);
-		String str=kb.next();
-		char c=kb.next().charAt(0);
-		for(int x : T.solution(str, c)){
-			System.out.print(x+" ");
+	public String solution2(String str, char c) {
+		String answer = "";
+		
+		int[] leftArr = new int[str.length()];
+		int[] rightArr = new int[str.length()];
+		
+		int cnt = 0;
+		for(int i = 0; i < str.length(); i++) {
+			if(str.charAt(i) != c) {
+				cnt++;
+			}else {
+				cnt = 0;	
+			}
+			leftArr[i] = cnt;
 		}
+		
+		for(int i = str.length() - 1; i > 0; i--) {
+			if(str.charAt(i) != c) {
+				cnt++;
+			}else {
+				cnt = 0;	
+			}
+			
+			
+			
+			if(leftArr[i] < cnt) answer += leftArr[i];
+			else answer += cnt;
+		}
+		
+		return answer;
+	}
+	
+	public int[] solution3(String s, char t) {
+		int[] answer = new int[s.length()];
+		
+		int p = 1000;
+		for(int i = 0; i < s.length(); i++) {
+			if(s.charAt(i) == t) {
+				p = 0;
+				answer[i] = p;
+			}else {
+				p++;
+				answer[i] = p;
+			}
+		}
+		p = 1000;
+		for(int i = s.length() - 1; i >= 0; i--) {
+			if(s.charAt(i) == t) p = 0;
+			else {
+				p++;
+				answer[i] = Math.min(answer[i], p);
+			}
+		}
+		
+		return answer;
+	}
+	
+
+	
+	
+	
+	
+	public static void main(String args[]) {
+		Main t = new Main();
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String str = scan.nextLine();
+		char c = scan.next().charAt(0);
+		//System.out.println(t.solution(str, c));
+		//System.out.println(t.solution2(str, c));
+		for(int x : t.solution3(str, c)) {
+			System.out.println(x+ " ");
+		}
+		
 	}
 }

@@ -1,15 +1,63 @@
-import java.util.*;
-class Main {	
-	public String solution(String s){
-		String answer="NO";
+package com.coding.java08;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+	
+	public String solution(String str) {
+		String answer = "YES";
+		
+		String upperStr = str.toUpperCase();
+		
+		char[] c = upperStr.toCharArray();
+		
+		int count = 0;
+		for(char x : c) {
+			if(!Character.isAlphabetic(x)) count++;
+		}
+		
+		char[] converterC = new char[c.length - count];
+		
+		int i = 0;
+		for(char x : c) {
+			if(Character.isAlphabetic(x)) {
+				converterC[i++] = x;
+			}
+		}
+		
+		int lt = 0, rt = converterC.length - 1;
+		while(lt < rt) {
+			//System.out.println("lt : "+converterC[lt]+" , rt : "+converterC[rt]);
+			if(converterC[lt] != converterC[rt]) return "NO";
+			
+			lt++;
+			rt--;
+		}
+		
+		//System.out.println(converterC);
+		
 		
 		return answer;
 	}
-
-	public static void main(String[] args){
-		Main T = new Main();
-		Scanner kb = new Scanner(System.in);
-		String str=kb.nextLine();
-		System.out.print(T.solution(str));
+	
+	
+	
+	
+	
+	public static void main(String args[]) {
+		Main t = new Main();
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String str = scan.nextLine();
+		
+		//a = 97 ~ 122
+		//A = 65 ~ 90
+		
+		
+		System.out.println(t.solution(str));
+		
+		
 	}
 }

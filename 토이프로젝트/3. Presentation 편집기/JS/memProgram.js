@@ -44,8 +44,16 @@ class Notepad{
     closeProgram(){
         let content = this.contentBox.text();
         let date = new Date().toLocaleString();
-        if(content.length != 0){
+        if(content.trim().length != 0){
             let inputTitle = prompt("제목을 입력해주세요", "default");
+            console.log(inputTitle);
+            if(inputTitle == undefined){
+                //내용 초기화
+                this.notepad.find('.content').text('');
+                this.notepad.find('.length').text('');
+                this.notepad.stop().slideToggle();
+                return;
+            }
             let newFile = new Box({
                 selectorId : getOnlyId(),
                 title : inputTitle,
@@ -63,6 +71,7 @@ class Notepad{
         //내용 초기화
         this.notepad.find('.content').text('');
         this.notepad.find('.length').text('');
+        //this.notepad.find('.date').text(app.getCurentTimeNow());
 
         //숨기기
         this.notepad.stop().slideToggle();
