@@ -64,7 +64,7 @@ class Calculator{
             }
         })
         window.addEventListener('keydown', function(e){
-            console.log(e.key);
+            //console.log(e.key);
             if(_this.focusFlag){
                 let code = e.keyCode;
 

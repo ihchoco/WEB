@@ -240,7 +240,7 @@
             </div>
            
             <!-- 프로그램(크롬브라우저) -->
-            <div class="chrome" id="chrome">
+            <!-- <div class="chrome" id="chrome">
                 <div class="top">
                     <div class="btns">
                         <span id="exitBtn"></span>
@@ -251,15 +251,8 @@
                         <div id="targetTabBox">
 
                         </div>
-                        <!-- <div class="browserTabBox active" id="mainTabTitle">
-                            <p class="tabTitle">google chrome</p>
-                            <p class="tabCloseBtn">X</p>
-                        </div> -->
-                        <!-- <div class="browserTabBox">
-                            <p class="tabTitle">업무용 메모PC</p>
-                            <p class="tabCloseBtn">X</p>
-                        </div> -->
-                        <div class="tabPlusBtn">
+
+                        <div class="tabPlusBtn" id="tabPlusBtn">
                             <i class="fa fa-plus"></i>
                         </div>
                     </div>
@@ -277,15 +270,9 @@
                 </div>
 
                 <div class="content" id="chromeIframeBox">
-                    <!-- <iframe src="https://www.google.com/webhp?igu=1" style="border: none;" id="browserFrame">
-                        현재 사용중인 브라우저는 Iframe 요소를 지원하지 않습니다.
-                    </iframe>
-                    <iframe src="https://www.google.com/webhp?igu=1" style="border: none; display : none;" id="browserFrame2">
-                        현재 사용중인 브라우저는 Iframe 요소를 지원하지 않습니다.
-                    </iframe> -->
 
                 </div>
-            </div>
+            </div> -->
 
 
             <!-- 미작업(box 오른쪽 클릭시 이벤트) -->
@@ -333,6 +320,11 @@
             <div class="docIcon">
                 <div class="imageBox" id="todoListIcon">
                     <img src="../Image/todolist.png">
+                </div>
+            </div>
+            <div class="docIcon">
+                <div class="imageBox" id="gameIcon">
+                    <img src="../Image/game.png">
                 </div>
             </div>
         </article>
@@ -441,6 +433,9 @@
         function getOnlyId(){
             return `box_${Date.now()}`;
         }
+        function getNowId(){
+            return Date.now();
+        }
         function getNow(){
             return new Date().toLocaleString();
         }
@@ -516,26 +511,35 @@
         //5. 브라우저(Chrome)
 
         //5-1. TAB정보 만들기
-        let tabList = new Array();
-        let mainTab = {
-            'title' : 'chrome',
-            'url' : 'https://www.google.com/webhp?igu=1',
-            'id' : '0'
-        }
-        tabList.push(mainTab);
+
+        //chrome 브라우저 생성시 위치 left, top 100씩 추가해서 만들어주기
+        let browserPosition = 100;
 
         let browser = new Chrome({
-            selector : 'chrome',
-            title : '크롬',
-            content : '',
-            size : 0,
-            tabList : tabList,
-            selfFlag : 0
-        });
+                selector : 'chrome_'+getNowId(),
+                title : '크롬',
+                content : '',
+                size : 0,
+                // tabList : tabList,
+                selfFlag : 0,
+                browserPosition : browserPosition
+            });
 
+            browserPosition += 100;
         //browser.chrome.slideToggle(0);
+
         $("#chromeIcon").click(function(){
-            browser.chrome.stop().slideToggle();
+            let browser = new Chrome({
+                selector : 'chrome_'+getNowId(),
+                title : '크롬',
+                content : '',
+                size : 0,
+                // tabList : tabList,
+                selfFlag : 0,
+                browserPosition : browserPosition
+            });
+            // browser.chrome.stop().slideToggle();
+            browserPosition += 100;
         });
 
         // MODAL AND FAQ
