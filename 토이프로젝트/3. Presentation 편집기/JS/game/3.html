@@ -1,0 +1,196 @@
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <style>
+            *{  margin : 0; padding : 0; }
+            #wrapper{ width : 80%; margin : auto; position: relative; text-align : center;}
+            #myCanvas{ margin-left : 40; margin-top : 40;  /* margin : auto; */}
+            #instruction{ display : inline-block; }
+        </style>
+        <script>
+            window.onload = function(){
+                /* 변수 선언 부분*/
+                var canvas = document.getElementById("myCanvas");
+                var ctx = canvas.getContext("2d");
+                var score = 0;
+                var fire = 0;
+                var level = 1;
+                
+                /* player 관련 변수 선언 */
+                var px = canvas.width/2, py = canvas.height-40; 
+                var left = false, right = false;
+                var pw = 40, ph = 20;
+                var pcx = 0; //player 위치 변경해주는 변수
+                var pcolour = "#444";
+                
+                /* block 관련 변수 선언 */
+                var bricksCnt = 5;
+
+                var randCnt = Math.floor(Math.random()*4)+1;
+                var rowCnt = randCnt, columnCnt = 10; 
+                var bx = 50, by = 40;
+                var bw = 40, bh = 20;
+                var exist;
+                var bricks = [];
+                
+                /* missile 관련 변수 선언 */
+                var mx , my, mw = 10, mh = 10, flag = 0, mcy = 0, powerFlag = 0, mcolour = "red";
+                var missile = [];
+          
+                function draw(){
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+                    if(left == true && px > 0){ px += -5; }
+                    if(right == true && px < canvas.width-pw){ px += 5; }
+                    if(powerFlag == 0){ mcolour = "red"; pcolour = "#444"; }
+                    if(powerFlag == 1){ mcolour = "blue"; pcolour = "lime"; }
+                    if(my < 0){ my = py; mcy = 0; flag = 0; }
+                    
+                    missile.forEach(function(value, idx){
+                        bricks.forEach(function(value2, idx2){
+                            value2.forEach(function(value3, idx3){
+                                if(value3.exist == 1 && value.flag==1 && (value.y >= value3.brickY && value.y <= value3.brickY+bh) && (value.x >= value3.brickX && value.x <= value3.brickX+bw) ){
+                                // alert("hit");
+                                    if(powerFlag == 0){
+                                        flag = 0;
+                                        my = py;
+                                        mcy = 0;
+                                    }else if(powerFlag == 1){}
+                                    value3.exist = 0;
+                                    missile.shift();
+                                    score++;
+                                }
+                                console.log("벽돌 x축 : "+value3.brickX+", 벽돌 y축 : "+value3.brickY );
+                            })
+                        })
+                    })
+                    
+                    drawBricks();
+                    drawCharacter();
+                    drawMissile();
+                    drawScore();
+                    
+                }
+                
+                function gameStart(){
+                    declareBricks();
+                    setInterval(draw,10);
+                    setInterval(moveBricks,1000);
+                }
+                
+                /* key event 발생 선언 및 호출 부분*/
+                addEventListener("keydown",keydown);
+                addEventListener("keyup",keyup)
+                function keydown(evt){
+                    switch(evt.keyCode){
+                        case 37 : left = true; console.log("left-down");break;
+                        case 39 : right = true; console.log("right-donw"); break;
+                        case 13 : gameStart(); console.log('game start'); break;
+                        case 32 : console.log('misile-space bar'); mx = px+15; declareMissile(mx); fire++;  flag = 1; break;
+                        case 88 : console.log('powerMode'); powerFlag = 1; break;
+                        case 90 : console.log('normalMode'); powerFlag = 0; break;
+                    }
+                    console.log(evt.keyCode);
+                }
+                function keyup(evt){
+                    switch(evt.keyCode){
+                        case 37 : left = false; console.log("left-up");break;
+                        case 39 : right = false; break;
+                    }
+                }
+
+                /* 그림 그리는 함수 선언*/
+                function drawCharacter(){
+                    ctx.fillStyle = pcolour;
+                    ctx.fillRect(px,py,pw,ph);
+                }
+                function declareBricks(){
+                    for(var i = 0; i < rowCnt; i++){
+                        bricks[i] = [];
+                        for(var j = 0; j < columnCnt; j++){
+                            bricks[i].push({brickX : bx*(j+1), brickY : by*(i+1), exist : 1}); //x: 100 200 300 400 500 y: 40  bx가 위치임(초기값 지정하면서 사이간 거리)
+                        }
+                    }
+                }
+                function drawBricks(){
+                    bricks.forEach(function(value, idx){
+                        value.forEach(function(value2, idx2){
+                            if(value2.exist == 1){
+                                ctx.fillStyle = "#f77";
+                                ctx.fillRect(value2.brickX, value2.brickY, bw, bh);
+                            }
+                        })
+                    })
+                }
+                function moveBricks(){
+                    bricks.forEach(function(value, idx){
+                        value.forEach(function(value2, idx2){
+                            if(value2.exist == 1){
+                                value2.brickY += 10;
+                            }
+                            if(value2.brickY == canvas.height){
+                                alert("Game Over");
+                                location.reload();
+                            }
+                        })
+                    })
+                }
+                
+                function declareMissile(){
+                    missile.push({x : mx, y : py, mcy : 0, flag : 1});
+                }
+
+                function drawMissile(){
+                    /*여기서 문제 발생  미사일 y값이 너무 빨리 움직인다 .*/
+                    missile.forEach(function(value, idx){
+                        if(value.flag == 1){
+                            value.mcy += -0.1;
+                            value.y += value.mcy;
+                            console.log("idx : "+idx +" , 미사일y : "+value.y);
+                            ctx.fillStyle = mcolour;
+                            ctx.fillRect(value.x,value.y,mw,mh);
+                        }
+                        if(value.y <= 0 ){
+                            missile.shift();
+                        }
+                        if(missile.length >= 5){
+                            missile.pop();
+                        }
+
+                    })
+             
+                }
+                function drawScore(){
+                    ctx.font = "16px Arial";
+                    ctx.fillStyle = "#0095DD";
+                    ctx.fillText("Score : "+score, canvas.width-100 , 20);
+                    ctx.fillText("Fire : "+fire, canvas.width-100 , 40);
+                    if(score == (rowCnt*columnCnt)){
+                        alert("Level"+(level++)+" has finished successfully");
+                        rowCnt++;
+                        score = 0;
+                        declareBricks();
+                    }
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id = "wrapper">
+            <canvas id = "myCanvas" width = "600px" height = "600px" style = "border : 1px solid black">error</canvas>   
+        </div>
+        <div id = "instruction">
+        	<span>트리비 500 Error</span>
+            <span>Galaxy Game Start : Enter</span><br>
+            <span>PowerMode on : x</span><br>
+            <span>PowerMode off : z</span><br>
+        </div>
+        <div id = "mp3">
+            <audio controls loop>
+                <source src="./old_pop.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </body>
+</html>

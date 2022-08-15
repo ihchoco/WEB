@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        </style>
+        <script>
+           window.onload = function(){
+               var canvas = document.getElementById('myCanvas');
+               var ctx = canvas.getContext("2d");
+
+               ctx.scale(20,20);
+                var ax = 14;
+                var ay = 20;
+                
+                var score = 0;
+
+                var offset = {x : 0, y : 0};
+
+                var player = {matrix : createPiece('T'), position : offset, score : 0,};
+
+                var colors = [null, 'red', 'blue', 'violet', 'green', 'purple', 'orange', 'pink'];
+
+                var arena = [];
+                
+                function declareArena(){
+                    while(ay--){ //canvas 크기가 arena y축 0~19 사이임
+                        arena.push(new Array(15).fill(0));
+                    }
+                    console.log(arena);
+                    console.table(arena);
+                }
+
+                function merge(arena, player){
+                    player.matrix.forEach(function(value2, y){
+                        value2.forEach(function(value, x){
+                            if(value != 0){
+                                arena[y+player.position.y][x+player.position.x] = value;
+                            }
+                        })
+                    })
+                    console.log(arena);
+                }
+                function playerRotate(dir){
+                    var pos = player.position.x;
+                    var off = 1;
+                    rotate(player.matrix, dir);
+                    while(collide(arena, player)){
+                        player.position.x += off;
+                        off = -(off + (off > 0 ? 1 : -1));
+                        if(off > player.matrix[0].length){
+                            rotate(player.matrix, -dir);
+                            player.position.x = pos;
+                            return;
+                        } 
+                    }
+                }
+
+                function createPiece(type){
+                    if(type == 'T'){
+                        return [[0,0,0],
+                              [1,1,1],
+                              [0,1,0]];
+                    }else if(type == 'O'){
+                        return [[2,2],
+                                [2,2]];
+                    }else if(type == 'L'){
+                        return [[0,3,0],
+                                [0,3,0],
+                                [0,3,3]];
+                    }else if(type == 'J'){
+                        return [[0,4,0]
+                                [0,4,0]
+                                [4,4,0]];
+                    }else if(type == 'I'){
+                        return [[0,5,0,0],
+                                [0,5,0,0],
+                                [0,5,0,0],
+                                [0,5,0,0]]
+                    }else if(type == 'S'){
+                        return [[0,6,6],
+                                [6,6,0],
+                                [0,0,0]];
+                    }else if(type == 'Z'){
+                        return [[7,7,0],
+                                [0,7,7],
+                                [0,0,0]];
+                    }
+                }
+
+                function rotate(matrix, dir){
+                    for(var y = 0; y < matrix.length; y++){
+                        for(var x = 0; x < y; x++){
+                            [
+                                matrix[x][y],
+                                matrix[y][x],
+                            ] = [
+                                matrix[y][x],
+                                matrix[x][y],
+                            ];
+                        }
+                    }
+                    if(dir > 0){
+                        matrix.forEach(function(rw){
+                            row.reverse();
+                        })
+                    }else {
+                        matrix.reverse();
+                    }
+                }
+              
+                function collide(arena, player){
+                    const [m , o] = [player.matrix, player.position];
+                    for(var y = 0; y < m.length; ++y){
+                        for(var x = 0; x < m[y].length; ++x){ //여기만 이해하면 쉽다!!!!!!!!!!!!!!!!!!!!!!
+                            if(m[y][x] !== 0 && (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0){ //arena[y+o.y]는 0 밑에 아무것도 없을때 true를 반환한다는 뜻?!
+                                return true;
+                            }
+                        }
+                    }
+                    // console.log(arena);
+                    return false;
+                }
+                
+                function drawMatrix(matrix, offset){
+                    matrix.forEach(function(value2, y){
+                        value2.forEach(function(value, x){
+                            if(value != 0){
+                                ctx.fillStyle = colors[value];
+                                ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
+                                // console.log("x 위치 : "+(x+offset.x)+", y 위치 : "+(y+offset.y));
+                            }
+                        })
+                    });
+                    // console.log("finished");
+                }
+                
+                function updateScore(){
+                    document.getElementById('score').innerText = player.score;
+                }
+
+                function draw(){
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                                     
+                    drawMatrix(arena, {x : 0, y : 0}); 
+                    drawMatrix(player.matrix, offset); 
+                }
+                function playerDrop(){
+                    player.position.y++;
+                    if(collide(arena, player)){ 
+                        player.position.y--;
+                        merge(arena, player);
+                        playerReset();
+                        arenaSweep();
+                    }
+                }
+                function playerReset(){
+                    var pieces = 'ILJOTSZ';
+                    var rand = Math.floor(Math.random()*7);
+                    var type = pieces.substr(rand,1);
+                   
+                    player.matrix = createPiece(type);
+                    while(player.matrix == ""){
+                        rand = Math.floor(Math.random()*7);
+                        type = pieces.substr(rand,1);
+                        player.matrix = createPiece(type);
+                    }
+                    console.log("player.matrix : "+ player.matrix);
+                    player.position.y = 0;
+                    player.position.x = 0;
+                    
+                    if(collide(arena, player)){
+                        arena.forEach(function(value,row){
+                            arena[row].fill(0);
+                        })
+                    }
+
+                }
+                function playerMove(dir){
+                    player.position.x += dir;
+                    if(collide(arena, player)){
+                        player.position.x -= dir;
+                    }
+                }
+
+                function arenaSweep(){
+                    outer : for(var y = arena.length - 1; y > 0; --y){
+                        for (var x = 0; x < arena[y].length; ++x){
+                            if(arena[y][x] === 0){
+                                continue outer;
+                            }
+                        }
+                        const row = arena.splice(y,1)[0].fill(0);
+                        console.log("row : "+row);
+                        arena.unshift(row);
+                        ++y;
+                        updateScore();
+                        player.score += 100;
+                    }
+                }
+               
+
+                function gameStart(){
+                    declareArena();
+                    setInterval(playerDrop, 1000);
+                    setInterval(draw, 1000/15);
+                }
+                
+                /* 키 조작 부분*/
+                document.addEventListener('keydown',keydown);
+                function keydown(evt){
+                    switch(evt.keyCode){
+                        case 13 : console.log("game Start"); gameStart(); break;
+                        case 37 : playerMove(-1); break;
+                        case 39 : playerMove(1); break;
+                        case 40 : playerDrop(); break;
+                        case 81 : playerRotate(-1); break;
+                        case 82 : playerRotate(1); break;
+                    }
+                }
+           }
+        </script>
+    </head>
+    <body>
+        <h2>Tribee 404 error(테트리스)</h2>
+        <div>Enter : 시작 Q:회전</div>
+        <div id = "score">--점수--</div>
+        <canvas id = "myCanvas" height = "400">오류 발생</canvas>
+
+    </body>
+</html>
