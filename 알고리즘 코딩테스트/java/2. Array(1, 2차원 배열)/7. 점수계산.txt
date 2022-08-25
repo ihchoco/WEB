@@ -1,18 +1,40 @@
 import java.util.*;
-class Main {	
-	public int solution(int n, int[] arr){
-		int answer=0, cnt=0;
 
+public class Main {
+	
+	public int solution(int[] arr) {
+		int answer = 0;
+		
+		boolean flag = false;
+		int pos = 1;
+		for(int x : arr) {
+			if(flag) pos++;
+			else pos = 1;
+			
+			if(x == 1) {
+				answer += pos;
+				flag = true;
+			}else 
+				flag = false;
+			
+		}
+		
 		return answer;
 	}
-	public static void main(String[] args){
-		Main T = new Main();
-		Scanner kb = new Scanner(System.in);
-		int n=kb.nextInt();
-		int[] arr=new int[n];
-		for(int i=0; i<n; i++){
-			arr[i]=kb.nextInt();
+	
+	public static void main(String args[]) {
+		Main t = new Main();
+		Scanner scan = new Scanner(System.in);
+		
+		int n = scan.nextInt();
+		int[] arr = new int[n];
+		
+		for(int i = 0; i < n; i++) {
+			arr[i] = scan.nextInt();
 		}
-		System.out.print(T.solution(n, arr));
+		
+		System.out.println(t.solution(arr));
+		
 	}
+	
 }
