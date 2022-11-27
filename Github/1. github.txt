@@ -37,3 +37,17 @@
 
 
 이렇게 다시 해주면 된다.
+
+git commit 취소 방법
+1. git log 확인
+git log
+
+2. git commit 취소 
+git reset --soft HEAD^
+
+깃 ignroe 새로고침
+
+# 스테이징 된 것들 일단 모두 되돌리기. 왜냐하면 add된 상태에서 .gitignore가 안통하기 때문
+$ git rm -rf --cached . 
+$ git add .
+$ git commit -m "Apply .gitignore"

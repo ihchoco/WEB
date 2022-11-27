@@ -1,0 +1,39 @@
+.treeview {
+    align-items: center;
+}
+
+.ti{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.treeview ul{
+    list-style-type: none;
+    font-size: 14px;
+}
+.treeview ul li {
+    margin-bottom: 5px;
+}
+
+.treeview .node-position, .node-name{
+    transform: translateY(-5px);
+    display: inline-block;
+}
+.treeview .right-arrow{
+    transition: 0.4s ease-out;
+}
+.treeview .right-arrow.active{
+    transform: rotate(90deg);
+}
+.treeview .folder{
+    color: var(--color-cobalt-blue);
+    cursor: pointer;
+}
+
+.nested{
+    padding-left: 30px;
+    display : none;
+}
+.nested.active{
+    display: block;
+}
+

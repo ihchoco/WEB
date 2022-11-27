@@ -1,0 +1,9 @@
+brew install mariadb
+
+mysql.server start
+
+brew services start mariadb
+
+mysql
+
+sudo mysql -u root
